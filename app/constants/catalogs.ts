@@ -1,4 +1,5 @@
 import { EventFormat, LanguageCode, Level } from '../models/Event';
+import { ProficiencyLevel } from '../models/Profile';
 
 export const LANGUAGES: Record<LanguageCode, { name: string; flag: string }> = {
   en: { name: 'Английский', flag: '🇬🇧' },
@@ -13,6 +14,15 @@ export const LANGUAGES: Record<LanguageCode, { name: string; flag: string }> = {
 export const LANGUAGE_CODES = Object.keys(LANGUAGES) as LanguageCode[];
 
 export const LEVELS: Level[] = ['A1-A2', 'B1-B2', 'C1-C2', 'any'];
+
+export const PROFICIENCY_LEVELS: ProficiencyLevel[] = [
+  'A1',
+  'A2',
+  'B1',
+  'B2',
+  'C1',
+  'C2',
+];
 
 export const LEVEL_LABELS: Record<Level, string> = {
   'A1-A2': 'A1–A2',

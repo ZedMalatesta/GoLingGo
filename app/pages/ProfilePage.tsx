@@ -17,17 +17,17 @@ import {
   INTERESTS,
   LANGUAGE_CODES,
   LANGUAGES,
-  LEVEL_LABELS,
-  LEVELS,
+  PROFICIENCY_LEVELS,
 } from '../constants/catalogs';
 import { colors } from '../constants/colors';
 import { mockEvents } from '../mocks/events';
-import { Level } from '../models/Event';
-import { UserLanguage } from '../models/Profile';
+import { ProficiencyLevel, UserLanguage } from '../models/Profile';
 import useAppStore from '../store/appStore';
 
-const nextLevel = (level: Level): Level =>
-  LEVELS[(LEVELS.indexOf(level) + 1) % LEVELS.length];
+const nextLevel = (level: ProficiencyLevel): ProficiencyLevel =>
+  PROFICIENCY_LEVELS[
+    (PROFICIENCY_LEVELS.indexOf(level) + 1) % PROFICIENCY_LEVELS.length
+  ];
 
 const ProfilePage: FC = () => {
   const profile = useAppStore((state) => state.profile);
@@ -166,9 +166,7 @@ const ProfilePage: FC = () => {
                   setLanguage({ ...item, level: nextLevel(item.level) })
                 }
               >
-                <Text style={styles.levelLabel}>
-                  {LEVEL_LABELS[item.level]}
-                </Text>
+                <Text style={styles.levelLabel}>{item.level}</Text>
               </Pressable>
             )}
             <Pressable
@@ -189,7 +187,7 @@ const ProfilePage: FC = () => {
                 label={`+ ${LANGUAGES[code].flag} ${LANGUAGES[code].name}`}
                 active={false}
                 onPress={() =>
-                  setLanguage({ code, role: 'learning', level: 'B1-B2' })
+                  setLanguage({ code, role: 'learning', level: 'B1' })
                 }
               />
             ))}

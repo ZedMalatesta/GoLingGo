@@ -3,7 +3,12 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { EventFilters, LanguageEvent } from '../models/Event';
-import { UserLanguage, UserProfile } from '../models/Profile';
+import {
+  ProficiencyLevel,
+  UserLanguage,
+  UserProfile,
+} from '../models/Profile';
+import { PROFICIENCY_LEVELS } from '../constants/catalogs';
 
 const defaultFilters: EventFilters = {
   language: null,
@@ -19,10 +24,26 @@ const defaultProfile: UserProfile = {
   bio: '',
   interests: [],
   languages: [
-    { code: 'ru', role: 'native', level: 'any' },
-    { code: 'en', role: 'learning', level: 'B1-B2' },
+    { code: 'ru', role: 'native', level: 'C2' },
+    { code: 'en', role: 'learning', level: 'B1' },
   ],
 };
+
+// Profiles saved before CEFR proficiency levels stored event-style bands
+// ("B1-B2"); map them onto the new scale.
+const legacyLevelMap: Record<string, ProficiencyLevel> = {
+  'A1-A2': 'A2',
+  'B1-B2': 'B1',
+  'C1-C2': 'C1',
+  any: 'B1',
+};
+
+const normalizeLanguage = (item: UserLanguage): UserLanguage => ({
+  ...item,
+  level: PROFICIENCY_LEVELS.includes(item.level)
+    ? item.level
+    : (legacyLevelMap[item.level] ?? 'B1'),
+});
 
 interface AppState {
   hydrated: boolean;
@@ -107,10 +128,14 @@ const useAppStore = create<AppState>()(
       }),
       merge: (persisted, current) => {
         const state = (persisted ?? {}) as Partial<AppState>;
+        const profile = { ...defaultProfile, ...state.profile };
         return {
           ...current,
           ...state,
-          profile: { ...defaultProfile, ...state.profile },
+          profile: {
+            ...profile,
+            languages: profile.languages.map(normalizeLanguage),
+          },
         };
       },
       onRehydrateStorage: () => (state) => {
