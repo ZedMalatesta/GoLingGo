@@ -1,4 +1,13 @@
-export type LanguageCode = 'en' | 'de' | 'es' | 'fr' | 'it' | 'ru' | 'zh';
+export type LanguageCode =
+  | 'en'
+  | 'de'
+  | 'es'
+  | 'fr'
+  | 'it'
+  | 'pl'
+  | 'be'
+  | 'ru'
+  | 'zh';
 
 export type Level = 'A1-A2' | 'B1-B2' | 'C1-C2' | 'any';
 

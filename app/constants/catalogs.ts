@@ -7,6 +7,8 @@ export const LANGUAGES: Record<LanguageCode, { name: string; flag: string }> = {
   es: { name: 'Испанский', flag: '🇪🇸' },
   fr: { name: 'Французский', flag: '🇫🇷' },
   it: { name: 'Итальянский', flag: '🇮🇹' },
+  pl: { name: 'Польский', flag: '🇵🇱' },
+  be: { name: 'Белорусский', flag: '🇧🇾' },
   ru: { name: 'Русский', flag: '🇷🇺' },
   zh: { name: 'Китайский', flag: '🇨🇳' },
 };
