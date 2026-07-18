@@ -15,6 +15,9 @@ const defaultFilters: EventFilters = {
 const defaultProfile: UserProfile = {
   name: '',
   city: 'Белград',
+  avatar: '🙂',
+  bio: '',
+  interests: [],
   languages: [
     { code: 'ru', role: 'native', level: 'any' },
     { code: 'en', role: 'learning', level: 'B1-B2' },
@@ -102,6 +105,14 @@ const useAppStore = create<AppState>()(
         myEvents,
         profile,
       }),
+      merge: (persisted, current) => {
+        const state = (persisted ?? {}) as Partial<AppState>;
+        return {
+          ...current,
+          ...state,
+          profile: { ...defaultProfile, ...state.profile },
+        };
+      },
       onRehydrateStorage: () => (state) => {
         state?.setHydrated();
       },

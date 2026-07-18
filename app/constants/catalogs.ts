@@ -29,3 +29,29 @@ export const FORMATS: Record<EventFormat, string> = {
 };
 
 export const FORMAT_CODES = Object.keys(FORMATS) as EventFormat[];
+
+export const AVATARS = [
+  '🙂',
+  '😎',
+  '🦉',
+  '🐙',
+  '🌍',
+  '📚',
+  '🎧',
+  '☕',
+  '🚀',
+  '🌸',
+] as const;
+
+export const INTERESTS = [
+  'Путешествия',
+  'Кино',
+  'Музыка',
+  'Еда',
+  'Спорт',
+  'IT',
+  'Книги',
+  'Игры',
+  'Искусство',
+  'Наука',
+] as const;

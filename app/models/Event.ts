@@ -19,6 +19,7 @@ export interface LanguageEvent {
   organizer: string;
   capacity: number;
   attendees: number;
+  imageUrl?: string;
 }
 
 export interface EventFilters {

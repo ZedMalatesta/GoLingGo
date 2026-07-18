@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { FORMATS, LANGUAGES, LEVEL_LABELS } from '../constants/catalogs';
 import { colors } from '../constants/colors';
@@ -25,9 +25,16 @@ export const formatEventDate = (dateISO: string): string =>
 const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
   const language = LANGUAGES[event.language];
   const isFull = !isRsvped && event.attendees >= event.capacity;
+  const imageUrl =
+    event.imageUrl ?? `https://picsum.photos/seed/${event.id}/600/320`;
 
   return (
     <View style={styles.card}>
+      <Image
+        source={{ uri: imageUrl }}
+        style={styles.cover}
+        resizeMode="cover"
+      />
       <View style={styles.header}>
         <Text style={styles.flag}>{language.flag}</Text>
         <View style={styles.headerText}>
@@ -92,6 +99,12 @@ const styles = StyleSheet.create({
     padding: 14,
     marginHorizontal: 16,
     marginTop: 12,
+  },
+  cover: {
+    height: 140,
+    borderRadius: 10,
+    backgroundColor: colors.surface,
+    marginBottom: 12,
   },
   header: {
     flexDirection: 'row',

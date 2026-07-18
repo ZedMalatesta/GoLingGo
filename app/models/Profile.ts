@@ -11,5 +11,8 @@ export interface UserLanguage {
 export interface UserProfile {
   name: string;
   city: string;
+  avatar: string;
+  bio: string;
+  interests: string[];
   languages: UserLanguage[];
 }

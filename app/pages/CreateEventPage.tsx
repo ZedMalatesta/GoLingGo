@@ -53,6 +53,7 @@ const CreateEventPage: FC = () => {
   const [venue, setVenue] = useState('');
   const [dateText, setDateText] = useState('');
   const [capacity, setCapacity] = useState('15');
+  const [imageUrl, setImageUrl] = useState('');
 
   const handleSubmit = () => {
     if (!title.trim()) {
@@ -91,6 +92,7 @@ const CreateEventPage: FC = () => {
       organizer: profile.name.trim() || 'Вы',
       capacity: Math.max(1, parseInt(capacity, 10) || 15),
       attendees: 0,
+      imageUrl: imageUrl.trim() || undefined,
     });
 
     setTitle('');
@@ -98,6 +100,7 @@ const CreateEventPage: FC = () => {
     setVenue('');
     setDateText('');
     setPrice('');
+    setImageUrl('');
     Alert.alert('Готово!', 'Событие опубликовано и появилось в ленте.');
   };
 
@@ -204,6 +207,17 @@ const CreateEventPage: FC = () => {
             onChangeText={setVenue}
             placeholder="Кафе, адрес или ссылка на Zoom"
             placeholderTextColor={colors.textMuted}
+          />
+
+          <Text style={styles.label}>Обложка (ссылка, необязательно)</Text>
+          <TextInput
+            style={styles.input}
+            value={imageUrl}
+            onChangeText={setImageUrl}
+            placeholder="https://… (иначе подберём автоматически)"
+            placeholderTextColor={colors.textMuted}
+            autoCapitalize="none"
+            keyboardType="url"
           />
 
           <Text style={styles.label}>Мест всего</Text>

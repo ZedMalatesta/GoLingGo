@@ -13,6 +13,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Chip from '../components/Chip';
 import {
+  AVATARS,
+  INTERESTS,
   LANGUAGE_CODES,
   LANGUAGES,
   LEVEL_LABELS,
@@ -52,10 +54,41 @@ const ProfilePage: FC = () => {
       role: item.role === 'native' ? 'learning' : 'native',
     });
 
+  const toggleInterest = (interest: string) =>
+    updateProfile({
+      interests: profile.interests.includes(interest)
+        ? profile.interests.filter((item) => item !== interest)
+        : [...profile.interests, interest],
+    });
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.heading}>Профиль</Text>
+        <View style={styles.headerRow}>
+          <Text style={styles.avatarCurrent}>{profile.avatar}</Text>
+          <View style={styles.headerText}>
+            <Text style={styles.heading}>
+              {profile.name.trim() || 'Профиль'}
+            </Text>
+            <Text style={styles.headerCity}>{profile.city}</Text>
+          </View>
+        </View>
+
+        <Text style={styles.label}>Аватар</Text>
+        <View style={styles.avatarRow}>
+          {AVATARS.map((avatar) => (
+            <Pressable
+              key={avatar}
+              onPress={() => updateProfile({ avatar })}
+              style={[
+                styles.avatarOption,
+                profile.avatar === avatar && styles.avatarOptionActive,
+              ]}
+            >
+              <Text style={styles.avatarEmoji}>{avatar}</Text>
+            </Pressable>
+          ))}
+        </View>
 
         <Text style={styles.label}>Имя</Text>
         <TextInput
@@ -74,6 +107,31 @@ const ProfilePage: FC = () => {
           placeholder="Ваш город"
           placeholderTextColor={colors.textMuted}
         />
+
+        <Text style={styles.label}>О себе</Text>
+        <TextInput
+          style={[styles.input, styles.inputMultiline]}
+          value={profile.bio}
+          onChangeText={(bio) => updateProfile({ bio })}
+          placeholder="Пара слов о себе: зачем учите языки, о чём любите говорить"
+          placeholderTextColor={colors.textMuted}
+          multiline
+        />
+
+        <Text style={styles.sectionTitle}>Интересы</Text>
+        <Text style={styles.hint}>
+          Темы, о которых вам интересно говорить на встречах.
+        </Text>
+        <View style={styles.interestsRow}>
+          {INTERESTS.map((interest) => (
+            <Chip
+              key={interest}
+              label={interest}
+              active={profile.interests.includes(interest)}
+              onPress={() => toggleInterest(interest)}
+            />
+          ))}
+        </View>
 
         <Text style={styles.sectionTitle}>Мои языки</Text>
         <Text style={styles.hint}>
@@ -172,6 +230,52 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '700',
     color: colors.text,
+  },
+  headerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  headerText: {
+    flex: 1,
+  },
+  headerCity: {
+    fontSize: 13,
+    color: colors.textMuted,
+    marginTop: 2,
+  },
+  avatarCurrent: {
+    fontSize: 40,
+  },
+  avatarRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  avatarOption: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    borderWidth: 2,
+    borderColor: colors.border,
+    backgroundColor: colors.surface,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  avatarOptionActive: {
+    borderColor: colors.primary,
+    backgroundColor: colors.background,
+  },
+  avatarEmoji: {
+    fontSize: 22,
+  },
+  inputMultiline: {
+    minHeight: 72,
+    textAlignVertical: 'top',
+  },
+  interestsRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   label: {
     fontSize: 13,
