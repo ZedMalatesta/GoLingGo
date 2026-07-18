@@ -1,0 +1,266 @@
+import React, { FC, useMemo } from 'react';
+
+import { Ionicons } from '@expo/vector-icons';
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import Chip from '../components/Chip';
+import {
+  LANGUAGE_CODES,
+  LANGUAGES,
+  LEVEL_LABELS,
+  LEVELS,
+} from '../constants/catalogs';
+import { colors } from '../constants/colors';
+import { mockEvents } from '../mocks/events';
+import { Level } from '../models/Event';
+import { UserLanguage } from '../models/Profile';
+import useAppStore from '../store/appStore';
+
+const nextLevel = (level: Level): Level =>
+  LEVELS[(LEVELS.indexOf(level) + 1) % LEVELS.length];
+
+const ProfilePage: FC = () => {
+  const profile = useAppStore((state) => state.profile);
+  const myEvents = useAppStore((state) => state.myEvents);
+  const updateProfile = useAppStore((state) => state.updateProfile);
+  const setLanguage = useAppStore((state) => state.setLanguage);
+  const removeLanguage = useAppStore((state) => state.removeLanguage);
+
+  const availableCodes = LANGUAGE_CODES.filter(
+    (code) => !profile.languages.some((item) => item.code === code),
+  );
+
+  const communityCounts = useMemo(() => {
+    const all = [...myEvents, ...mockEvents];
+    return profile.languages.map((item) => ({
+      ...item,
+      count: all.filter((event) => event.language === item.code).length,
+    }));
+  }, [profile.languages, myEvents]);
+
+  const toggleRole = (item: UserLanguage) =>
+    setLanguage({
+      ...item,
+      role: item.role === 'native' ? 'learning' : 'native',
+    });
+
+  return (
+    <SafeAreaView style={styles.container} edges={['top']}>
+      <ScrollView contentContainerStyle={styles.content}>
+        <Text style={styles.heading}>Профиль</Text>
+
+        <Text style={styles.label}>Имя</Text>
+        <TextInput
+          style={styles.input}
+          value={profile.name}
+          onChangeText={(name) => updateProfile({ name })}
+          placeholder="Как вас зовут"
+          placeholderTextColor={colors.textMuted}
+        />
+
+        <Text style={styles.label}>Город</Text>
+        <TextInput
+          style={styles.input}
+          value={profile.city}
+          onChangeText={(city) => updateProfile({ city })}
+          placeholder="Ваш город"
+          placeholderTextColor={colors.textMuted}
+        />
+
+        <Text style={styles.sectionTitle}>Мои языки</Text>
+        <Text style={styles.hint}>
+          Добавьте все языки сразу — и родные, и изучаемые. Нажмите на уровень,
+          чтобы изменить его.
+        </Text>
+        {profile.languages.map((item) => (
+          <View key={item.code} style={styles.languageRow}>
+            <Text style={styles.languageName}>
+              {LANGUAGES[item.code].flag} {LANGUAGES[item.code].name}
+            </Text>
+            <Pressable
+              style={[
+                styles.roleBadge,
+                item.role === 'native' && styles.roleBadgeNative,
+              ]}
+              onPress={() => toggleRole(item)}
+            >
+              <Text
+                style={[
+                  styles.roleLabel,
+                  item.role === 'native' && styles.roleLabelNative,
+                ]}
+              >
+                {item.role === 'native' ? 'Родной' : 'Учу'}
+              </Text>
+            </Pressable>
+            {item.role === 'learning' && (
+              <Pressable
+                style={styles.levelBadge}
+                onPress={() =>
+                  setLanguage({ ...item, level: nextLevel(item.level) })
+                }
+              >
+                <Text style={styles.levelLabel}>
+                  {LEVEL_LABELS[item.level]}
+                </Text>
+              </Pressable>
+            )}
+            <Pressable
+              onPress={() => removeLanguage(item.code)}
+              hitSlop={8}
+              style={styles.removeButton}
+            >
+              <Ionicons name="close" size={18} color={colors.textMuted} />
+            </Pressable>
+          </View>
+        ))}
+
+        {availableCodes.length > 0 && (
+          <View style={styles.addRow}>
+            {availableCodes.map((code) => (
+              <Chip
+                key={code}
+                label={`+ ${LANGUAGES[code].flag} ${LANGUAGES[code].name}`}
+                active={false}
+                onPress={() =>
+                  setLanguage({ code, role: 'learning', level: 'B1-B2' })
+                }
+              />
+            ))}
+          </View>
+        )}
+
+        <Text style={styles.sectionTitle}>Мои коммьюнити</Text>
+        <Text style={styles.hint}>
+          События по каждому из ваших языков — так рождаются перекрёстные
+          коммьюнити.
+        </Text>
+        {communityCounts.map((item) => (
+          <View key={item.code} style={styles.communityRow}>
+            <Text style={styles.languageName}>
+              {LANGUAGES[item.code].flag} {LANGUAGES[item.code].name}
+            </Text>
+            <Text style={styles.communityCount}>
+              {item.count}{' '}
+              {item.count === 1 ? 'событие' : item.count < 5 ? 'события' : 'событий'}
+            </Text>
+          </View>
+        ))}
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  content: {
+    padding: 16,
+    paddingBottom: 32,
+  },
+  heading: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: colors.text,
+  },
+  label: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: colors.text,
+    marginTop: 14,
+    marginBottom: 6,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontSize: 15,
+    color: colors.text,
+    backgroundColor: colors.surface,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: colors.text,
+    marginTop: 24,
+  },
+  hint: {
+    fontSize: 12,
+    color: colors.textMuted,
+    marginTop: 4,
+    marginBottom: 10,
+  },
+  languageRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+    gap: 8,
+  },
+  languageName: {
+    fontSize: 15,
+    color: colors.text,
+    flex: 1,
+  },
+  roleBadge: {
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    backgroundColor: colors.surface,
+  },
+  roleBadgeNative: {
+    backgroundColor: colors.success,
+  },
+  roleLabel: {
+    fontSize: 12,
+    color: colors.text,
+    fontWeight: '600',
+  },
+  roleLabelNative: {
+    color: colors.background,
+  },
+  levelBadge: {
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    backgroundColor: colors.primary,
+  },
+  levelLabel: {
+    fontSize: 12,
+    color: colors.background,
+    fontWeight: '600',
+  },
+  removeButton: {
+    marginLeft: 4,
+  },
+  addRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 12,
+  },
+  communityRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 8,
+  },
+  communityCount: {
+    fontSize: 14,
+    color: colors.textMuted,
+  },
+});
+
+export default ProfilePage;
