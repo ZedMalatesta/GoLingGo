@@ -1,6 +1,7 @@
 import React, { FC, useMemo } from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import {
   Pressable,
   ScrollView,
@@ -16,10 +17,12 @@ import {
   AVATARS,
   INTERESTS,
   LANGUAGE_CODES,
-  LANGUAGES,
+  LANGUAGE_FLAGS,
   PROFICIENCY_LEVELS,
 } from '../constants/catalogs';
 import { colors } from '../constants/colors';
+import { APP_LOCALES } from '../i18n';
+import { pluralForm } from '../i18n/plural';
 import { mockEvents } from '../mocks/events';
 import { ProficiencyLevel, UserLanguage } from '../models/Profile';
 import useAppStore from '../store/appStore';
@@ -30,8 +33,11 @@ const nextLevel = (level: ProficiencyLevel): ProficiencyLevel =>
   ];
 
 const ProfilePage: FC = () => {
+  const { t, i18n } = useTranslation();
   const profile = useAppStore((state) => state.profile);
   const myEvents = useAppStore((state) => state.myEvents);
+  const locale = useAppStore((state) => state.locale);
+  const setLocale = useAppStore((state) => state.setLocale);
   const updateProfile = useAppStore((state) => state.updateProfile);
   const setLanguage = useAppStore((state) => state.setLanguage);
   const removeLanguage = useAppStore((state) => state.removeLanguage);
@@ -47,6 +53,10 @@ const ProfilePage: FC = () => {
       count: all.filter((event) => event.language === item.code).length,
     }));
   }, [profile.languages, myEvents]);
+
+  const eventForms = t('profile.eventForms', {
+    returnObjects: true,
+  }) as unknown as string[];
 
   const toggleRole = (item: UserLanguage) =>
     setLanguage({
@@ -68,13 +78,25 @@ const ProfilePage: FC = () => {
           <Text style={styles.avatarCurrent}>{profile.avatar}</Text>
           <View style={styles.headerText}>
             <Text style={styles.heading}>
-              {profile.name.trim() || 'Профиль'}
+              {profile.name.trim() || t('profile.title')}
             </Text>
             <Text style={styles.headerCity}>{profile.city}</Text>
           </View>
         </View>
 
-        <Text style={styles.label}>Аватар</Text>
+        <Text style={styles.label}>{t('profile.appLanguage')}</Text>
+        <View style={styles.chipRow}>
+          {APP_LOCALES.map((item) => (
+            <Chip
+              key={item.code}
+              label={item.label}
+              active={locale === item.code}
+              onPress={() => setLocale(item.code)}
+            />
+          ))}
+        </View>
+
+        <Text style={styles.label}>{t('profile.avatar')}</Text>
         <View style={styles.avatarRow}>
           {AVATARS.map((avatar) => (
             <Pressable
@@ -90,58 +112,53 @@ const ProfilePage: FC = () => {
           ))}
         </View>
 
-        <Text style={styles.label}>Имя</Text>
+        <Text style={styles.label}>{t('profile.name')}</Text>
         <TextInput
           style={styles.input}
           value={profile.name}
           onChangeText={(name) => updateProfile({ name })}
-          placeholder="Как вас зовут"
+          placeholder={t('profile.namePlaceholder')}
           placeholderTextColor={colors.textMuted}
         />
 
-        <Text style={styles.label}>Город</Text>
+        <Text style={styles.label}>{t('profile.city')}</Text>
         <TextInput
           style={styles.input}
           value={profile.city}
           onChangeText={(city) => updateProfile({ city })}
-          placeholder="Ваш город"
+          placeholder={t('profile.cityPlaceholder')}
           placeholderTextColor={colors.textMuted}
         />
 
-        <Text style={styles.label}>О себе</Text>
+        <Text style={styles.label}>{t('profile.bio')}</Text>
         <TextInput
           style={[styles.input, styles.inputMultiline]}
           value={profile.bio}
           onChangeText={(bio) => updateProfile({ bio })}
-          placeholder="Пара слов о себе: зачем учите языки, о чём любите говорить"
+          placeholder={t('profile.bioPlaceholder')}
           placeholderTextColor={colors.textMuted}
           multiline
         />
 
-        <Text style={styles.sectionTitle}>Интересы</Text>
-        <Text style={styles.hint}>
-          Темы, о которых вам интересно говорить на встречах.
-        </Text>
-        <View style={styles.interestsRow}>
+        <Text style={styles.sectionTitle}>{t('profile.interestsTitle')}</Text>
+        <Text style={styles.hint}>{t('profile.interestsHint')}</Text>
+        <View style={styles.chipRow}>
           {INTERESTS.map((interest) => (
             <Chip
               key={interest}
-              label={interest}
+              label={t(`interests.${interest}`)}
               active={profile.interests.includes(interest)}
               onPress={() => toggleInterest(interest)}
             />
           ))}
         </View>
 
-        <Text style={styles.sectionTitle}>Мои языки</Text>
-        <Text style={styles.hint}>
-          Добавьте все языки сразу — и родные, и изучаемые. Нажмите на уровень,
-          чтобы изменить его.
-        </Text>
+        <Text style={styles.sectionTitle}>{t('profile.languagesTitle')}</Text>
+        <Text style={styles.hint}>{t('profile.languagesHint')}</Text>
         {profile.languages.map((item) => (
           <View key={item.code} style={styles.languageRow}>
             <Text style={styles.languageName}>
-              {LANGUAGES[item.code].flag} {LANGUAGES[item.code].name}
+              {LANGUAGE_FLAGS[item.code]} {t(`languages.${item.code}`)}
             </Text>
             <Pressable
               style={[
@@ -156,7 +173,9 @@ const ProfilePage: FC = () => {
                   item.role === 'native' && styles.roleLabelNative,
                 ]}
               >
-                {item.role === 'native' ? 'Родной' : 'Учу'}
+                {item.role === 'native'
+                  ? t('profile.native')
+                  : t('profile.learning')}
               </Text>
             </Pressable>
             {item.role === 'learning' && (
@@ -184,7 +203,7 @@ const ProfilePage: FC = () => {
             {availableCodes.map((code) => (
               <Chip
                 key={code}
-                label={`+ ${LANGUAGES[code].flag} ${LANGUAGES[code].name}`}
+                label={`+ ${LANGUAGE_FLAGS[code]} ${t(`languages.${code}`)}`}
                 active={false}
                 onPress={() =>
                   setLanguage({ code, role: 'learning', level: 'B1' })
@@ -194,19 +213,17 @@ const ProfilePage: FC = () => {
           </View>
         )}
 
-        <Text style={styles.sectionTitle}>Мои коммьюнити</Text>
-        <Text style={styles.hint}>
-          События по каждому из ваших языков — так рождаются перекрёстные
-          коммьюнити.
+        <Text style={styles.sectionTitle}>
+          {t('profile.communitiesTitle')}
         </Text>
+        <Text style={styles.hint}>{t('profile.communitiesHint')}</Text>
         {communityCounts.map((item) => (
           <View key={item.code} style={styles.communityRow}>
             <Text style={styles.languageName}>
-              {LANGUAGES[item.code].flag} {LANGUAGES[item.code].name}
+              {LANGUAGE_FLAGS[item.code]} {t(`languages.${item.code}`)}
             </Text>
             <Text style={styles.communityCount}>
-              {item.count}{' '}
-              {item.count === 1 ? 'событие' : item.count < 5 ? 'события' : 'событий'}
+              {item.count} {pluralForm(item.count, eventForms, i18n.language)}
             </Text>
           </View>
         ))}
@@ -271,10 +288,6 @@ const styles = StyleSheet.create({
     minHeight: 72,
     textAlignVertical: 'top',
   },
-  interestsRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
   label: {
     fontSize: 13,
     fontWeight: '600',
@@ -303,6 +316,10 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     marginTop: 4,
     marginBottom: 10,
+  },
+  chipRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   languageRow: {
     flexDirection: 'row',

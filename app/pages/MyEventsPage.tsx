@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useMemo } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { Platform, SectionList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -14,6 +15,7 @@ const byDate = (a: LanguageEvent, b: LanguageEvent) =>
   new Date(a.dateISO).getTime() - new Date(b.dateISO).getTime();
 
 const MyEventsPage: FC = () => {
+  const { t } = useTranslation();
   const rsvpIds = useAppStore((state) => state.rsvpIds);
   const reminders = useAppStore((state) => state.reminders);
   const myEvents = useAppStore((state) => state.myEvents);
@@ -25,10 +27,20 @@ const MyEventsPage: FC = () => {
       .sort(byDate);
     const organizing = [...myEvents].sort(byDate);
     return [
-      { title: 'Я иду', data: going, emptyText: 'Пока нет записей — выберите событие в ленте.' },
-      { title: 'Я организую', data: organizing, emptyText: 'Создайте своё событие на вкладке «Создать».' },
+      {
+        key: 'going',
+        title: t('myEvents.going'),
+        data: going,
+        emptyText: t('myEvents.goingEmpty'),
+      },
+      {
+        key: 'organizing',
+        title: t('myEvents.organizing'),
+        data: organizing,
+        emptyText: t('myEvents.organizingEmpty'),
+      },
     ];
-  }, [rsvpIds, myEvents]);
+  }, [rsvpIds, myEvents, t]);
 
   const handleToggleRsvp = useCallback(
     async (event: LanguageEvent) => {
@@ -59,13 +71,13 @@ const MyEventsPage: FC = () => {
               isRsvped={rsvpIds.includes(item.id)}
               onToggleRsvp={handleToggleRsvp}
             />
-            {section.title === 'Я иду' && (
+            {section.key === 'going' && (
               <Text style={styles.reminderNote}>
                 {reminders[item.id]
-                  ? '🔔 Напомним за 2 часа до начала'
+                  ? t('myEvents.reminderSet')
                   : Platform.OS === 'web'
-                    ? '🔕 Напоминания доступны в мобильном приложении'
-                    : '🔕 Напоминание не запланировано'}
+                    ? t('myEvents.reminderWeb')
+                    : t('myEvents.reminderNone')}
               </Text>
             )}
           </View>

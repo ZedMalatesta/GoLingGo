@@ -1,19 +1,23 @@
 import { EventFormat, LanguageCode, Level } from '../models/Event';
 import { ProficiencyLevel } from '../models/Profile';
 
-export const LANGUAGES: Record<LanguageCode, { name: string; flag: string }> = {
-  en: { name: 'Английский', flag: '🇬🇧' },
-  de: { name: 'Немецкий', flag: '🇩🇪' },
-  es: { name: 'Испанский', flag: '🇪🇸' },
-  fr: { name: 'Французский', flag: '🇫🇷' },
-  it: { name: 'Итальянский', flag: '🇮🇹' },
-  pl: { name: 'Польский', flag: '🇵🇱' },
-  be: { name: 'Белорусский', flag: '🇧🇾' },
-  ru: { name: 'Русский', flag: '🇷🇺' },
-  zh: { name: 'Китайский', flag: '🇨🇳' },
+// Display names for languages, formats, levels, and interests live in the
+// i18n dictionaries (app/i18n/locales) — the catalogs only hold codes and
+// locale-independent data.
+
+export const LANGUAGE_FLAGS: Record<LanguageCode, string> = {
+  en: '🇬🇧',
+  de: '🇩🇪',
+  es: '🇪🇸',
+  fr: '🇫🇷',
+  it: '🇮🇹',
+  pl: '🇵🇱',
+  be: '🇧🇾',
+  ru: '🇷🇺',
+  zh: '🇨🇳',
 };
 
-export const LANGUAGE_CODES = Object.keys(LANGUAGES) as LanguageCode[];
+export const LANGUAGE_CODES = Object.keys(LANGUAGE_FLAGS) as LanguageCode[];
 
 export const LEVELS: Level[] = ['A1-A2', 'B1-B2', 'C1-C2', 'any'];
 
@@ -26,21 +30,23 @@ export const PROFICIENCY_LEVELS: ProficiencyLevel[] = [
   'C2',
 ];
 
-export const LEVEL_LABELS: Record<Level, string> = {
+const LEVEL_BAND_LABELS: Record<Exclude<Level, 'any'>, string> = {
   'A1-A2': 'A1–A2',
   'B1-B2': 'B1–B2',
   'C1-C2': 'C1–C2',
-  any: 'Любой уровень',
 };
 
-export const FORMATS: Record<EventFormat, string> = {
-  'speaking-club': 'Разговорный клуб',
-  meetup: 'Языковая встреча',
-  tandem: 'Тандем',
-  online: 'Онлайн',
-};
+export const levelLabel = (
+  level: Level,
+  t: (key: string) => string,
+): string => (level === 'any' ? t('levels.any') : LEVEL_BAND_LABELS[level]);
 
-export const FORMAT_CODES = Object.keys(FORMATS) as EventFormat[];
+export const FORMAT_CODES: EventFormat[] = [
+  'speaking-club',
+  'meetup',
+  'tandem',
+  'online',
+];
 
 export const AVATARS = [
   '🙂',
@@ -56,14 +62,14 @@ export const AVATARS = [
 ] as const;
 
 export const INTERESTS = [
-  'Путешествия',
-  'Кино',
-  'Музыка',
-  'Еда',
-  'Спорт',
-  'IT',
-  'Книги',
-  'Игры',
-  'Искусство',
-  'Наука',
+  'travel',
+  'movies',
+  'music',
+  'food',
+  'sport',
+  'it',
+  'books',
+  'games',
+  'art',
+  'science',
 ] as const;

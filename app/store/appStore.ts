@@ -9,6 +9,7 @@ import {
   UserProfile,
 } from '../models/Profile';
 import { PROFICIENCY_LEVELS } from '../constants/catalogs';
+import i18n, { AppLocale } from '../i18n';
 
 const defaultFilters: EventFilters = {
   language: null,
@@ -45,13 +46,29 @@ const normalizeLanguage = (item: UserLanguage): UserLanguage => ({
     : (legacyLevelMap[item.level] ?? 'B1'),
 });
 
+// Interests saved before i18n stored Russian display names; map them to keys.
+const legacyInterestMap: Record<string, string> = {
+  Путешествия: 'travel',
+  Кино: 'movies',
+  Музыка: 'music',
+  Еда: 'food',
+  Спорт: 'sport',
+  IT: 'it',
+  Книги: 'books',
+  Игры: 'games',
+  Искусство: 'art',
+  Наука: 'science',
+};
+
 interface AppState {
   hydrated: boolean;
+  locale: AppLocale;
   filters: EventFilters;
   rsvpIds: string[];
   reminders: Record<string, string>;
   myEvents: LanguageEvent[];
   profile: UserProfile;
+  setLocale: (locale: AppLocale) => void;
   setFilters: (patch: Partial<EventFilters>) => void;
   resetFilters: () => void;
   rsvp: (id: string, reminderId?: string | null) => void;
@@ -67,11 +84,16 @@ const useAppStore = create<AppState>()(
   persist(
     (set) => ({
       hydrated: false,
+      locale: 'ru',
       filters: defaultFilters,
       rsvpIds: [],
       reminders: {},
       myEvents: [],
       profile: defaultProfile,
+      setLocale: (locale) => {
+        i18n.changeLanguage(locale);
+        set({ locale });
+      },
       setFilters: (patch) =>
         set((state) => ({ filters: { ...state.filters, ...patch } })),
       resetFilters: () => set({ filters: defaultFilters }),
@@ -120,11 +142,12 @@ const useAppStore = create<AppState>()(
     {
       name: 'golinggo-store',
       storage: createJSONStorage(() => AsyncStorage),
-      partialize: ({ rsvpIds, reminders, myEvents, profile }) => ({
+      partialize: ({ rsvpIds, reminders, myEvents, profile, locale }) => ({
         rsvpIds,
         reminders,
         myEvents,
         profile,
+        locale,
       }),
       merge: (persisted, current) => {
         const state = (persisted ?? {}) as Partial<AppState>;
@@ -135,10 +158,16 @@ const useAppStore = create<AppState>()(
           profile: {
             ...profile,
             languages: profile.languages.map(normalizeLanguage),
+            interests: profile.interests.map(
+              (interest) => legacyInterestMap[interest] ?? interest,
+            ),
           },
         };
       },
       onRehydrateStorage: () => (state) => {
+        if (state) {
+          i18n.changeLanguage(state.locale);
+        }
         state?.setHydrated();
       },
     },

@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { FORMATS, LANGUAGES, LEVEL_LABELS } from '../constants/catalogs';
+import { LANGUAGE_FLAGS, levelLabel } from '../constants/catalogs';
 import { colors } from '../constants/colors';
+import { AppLocale, LOCALE_TAGS } from '../i18n';
 import { LanguageEvent } from '../models/Event';
 
 interface EventCardProps {
@@ -13,17 +15,20 @@ interface EventCardProps {
   onToggleRsvp: (event: LanguageEvent) => void;
 }
 
-export const formatEventDate = (dateISO: string): string =>
-  new Date(dateISO).toLocaleString('ru-RU', {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'long',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+export const formatEventDate = (dateISO: string, locale: string): string =>
+  new Date(dateISO).toLocaleString(
+    LOCALE_TAGS[locale as AppLocale] ?? locale,
+    {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'long',
+      hour: '2-digit',
+      minute: '2-digit',
+    },
+  );
 
 const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
-  const language = LANGUAGES[event.language];
+  const { t, i18n } = useTranslation();
   const isFull = !isRsvped && event.attendees >= event.capacity;
   const imageUrl =
     event.imageUrl ?? `https://picsum.photos/seed/${event.id}/600/320`;
@@ -36,7 +41,7 @@ const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
         resizeMode="cover"
       />
       <View style={styles.header}>
-        <Text style={styles.flag}>{language.flag}</Text>
+        <Text style={styles.flag}>{LANGUAGE_FLAGS[event.language]}</Text>
         <View style={styles.headerText}>
           <Text style={styles.title}>{event.title}</Text>
           <Text style={styles.organizer}>{event.organizer}</Text>
@@ -44,11 +49,11 @@ const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
       </View>
 
       <View style={styles.badges}>
-        <Text style={styles.badge}>{language.name}</Text>
-        <Text style={styles.badge}>{LEVEL_LABELS[event.level]}</Text>
-        <Text style={styles.badge}>{FORMATS[event.format]}</Text>
+        <Text style={styles.badge}>{t(`languages.${event.language}`)}</Text>
+        <Text style={styles.badge}>{levelLabel(event.level, t)}</Text>
+        <Text style={styles.badge}>{t(`formats.${event.format}`)}</Text>
         <Text style={[styles.badge, event.isFree && styles.badgeFree]}>
-          {event.isFree ? 'Бесплатно' : event.price ?? 'Платно'}
+          {event.isFree ? t('card.free') : (event.price ?? t('card.paid'))}
         </Text>
       </View>
 
@@ -58,7 +63,9 @@ const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
 
       <View style={styles.metaRow}>
         <Ionicons name="calendar-outline" size={14} color={colors.textMuted} />
-        <Text style={styles.meta}>{formatEventDate(event.dateISO)}</Text>
+        <Text style={styles.meta}>
+          {formatEventDate(event.dateISO, i18n.language)}
+        </Text>
       </View>
       <View style={styles.metaRow}>
         <Ionicons name="location-outline" size={14} color={colors.textMuted} />
@@ -69,7 +76,10 @@ const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
       <View style={styles.metaRow}>
         <Ionicons name="people-outline" size={14} color={colors.textMuted} />
         <Text style={styles.meta}>
-          {event.attendees + (isRsvped ? 1 : 0)} / {event.capacity} участников
+          {t('card.attendees', {
+            going: event.attendees + (isRsvped ? 1 : 0),
+            total: event.capacity,
+          })}
         </Text>
       </View>
 
@@ -83,7 +93,11 @@ const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
         ]}
       >
         <Text style={[styles.rsvpLabel, isRsvped && styles.rsvpLabelActive]}>
-          {isFull ? 'Мест нет' : isRsvped ? '✓ Вы записаны' : 'Пойду'}
+          {isFull
+            ? t('card.full')
+            : isRsvped
+              ? t('card.rsvped')
+              : t('card.rsvp')}
         </Text>
       </Pressable>
     </View>

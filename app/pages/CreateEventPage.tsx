@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import {
   Alert,
   KeyboardAvoidingView,
@@ -17,10 +18,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Chip from '../components/Chip';
 import {
   FORMAT_CODES,
-  FORMATS,
   LANGUAGE_CODES,
-  LANGUAGES,
-  LEVEL_LABELS,
+  LANGUAGE_FLAGS,
+  levelLabel,
   LEVELS,
 } from '../constants/catalogs';
 import { colors } from '../constants/colors';
@@ -40,6 +40,7 @@ const parseDate = (value: string): Date | null => {
 };
 
 const CreateEventPage: FC = () => {
+  const { t } = useTranslation();
   const addEvent = useAppStore((state) => state.addEvent);
   const profile = useAppStore((state) => state.profile);
 
@@ -57,23 +58,20 @@ const CreateEventPage: FC = () => {
 
   const handleSubmit = () => {
     if (!title.trim()) {
-      Alert.alert('Не хватает данных', 'Укажите название события.');
+      Alert.alert(t('create.missingDataTitle'), t('create.missingTitle'));
       return;
     }
     const date = parseDate(dateText);
     if (!date) {
-      Alert.alert(
-        'Неверная дата',
-        'Укажите дату в формате ГГГГ-ММ-ДД ЧЧ:ММ, например 2026-07-25 19:00.',
-      );
+      Alert.alert(t('create.badDateTitle'), t('create.badDateFormat'));
       return;
     }
     if (date.getTime() <= Date.now()) {
-      Alert.alert('Неверная дата', 'Событие должно быть в будущем.');
+      Alert.alert(t('create.badDateTitle'), t('create.dateInPast'));
       return;
     }
     if (!venue.trim()) {
-      Alert.alert('Не хватает данных', 'Укажите место встречи.');
+      Alert.alert(t('create.missingDataTitle'), t('create.missingVenue'));
       return;
     }
 
@@ -86,10 +84,10 @@ const CreateEventPage: FC = () => {
       format,
       isFree,
       price: isFree ? undefined : price.trim() || undefined,
-      city: format === 'online' ? 'Онлайн' : profile.city,
+      city: format === 'online' ? t('formats.online') : profile.city,
       venue: venue.trim(),
       dateISO: date.toISOString(),
-      organizer: profile.name.trim() || 'Вы',
+      organizer: profile.name.trim() || t('create.organizerFallback'),
       capacity: Math.max(1, parseInt(capacity, 10) || 15),
       attendees: 0,
       imageUrl: imageUrl.trim() || undefined,
@@ -101,7 +99,7 @@ const CreateEventPage: FC = () => {
     setDateText('');
     setPrice('');
     setImageUrl('');
-    Alert.alert('Готово!', 'Событие опубликовано и появилось в ленте.');
+    Alert.alert(t('create.successTitle'), t('create.successMessage'));
   };
 
   return (
@@ -111,61 +109,58 @@ const CreateEventPage: FC = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <ScrollView contentContainerStyle={styles.content}>
-          <Text style={styles.heading}>Новое событие</Text>
-          <Text style={styles.subheading}>
-            Публикация занимает пару минут — заполните форму, и событие сразу
-            появится в ленте.
-          </Text>
+          <Text style={styles.heading}>{t('create.heading')}</Text>
+          <Text style={styles.subheading}>{t('create.subheading')}</Text>
 
-          <Text style={styles.label}>Название</Text>
+          <Text style={styles.label}>{t('create.title')}</Text>
           <TextInput
             style={styles.input}
             value={title}
             onChangeText={setTitle}
-            placeholder="English Speaking Club"
+            placeholder={t('create.titlePlaceholder')}
             placeholderTextColor={colors.textMuted}
           />
 
-          <Text style={styles.label}>Описание</Text>
+          <Text style={styles.label}>{t('create.description')}</Text>
           <TextInput
             style={[styles.input, styles.inputMultiline]}
             value={description}
             onChangeText={setDescription}
-            placeholder="О чём встреча, кому подойдёт"
+            placeholder={t('create.descriptionPlaceholder')}
             placeholderTextColor={colors.textMuted}
             multiline
           />
 
-          <Text style={styles.label}>Язык</Text>
+          <Text style={styles.label}>{t('create.language')}</Text>
           <View style={styles.chipRow}>
             {LANGUAGE_CODES.map((code) => (
               <Chip
                 key={code}
-                label={`${LANGUAGES[code].flag} ${LANGUAGES[code].name}`}
+                label={`${LANGUAGE_FLAGS[code]} ${t(`languages.${code}`)}`}
                 active={language === code}
                 onPress={() => setLanguage(code)}
               />
             ))}
           </View>
 
-          <Text style={styles.label}>Уровень</Text>
+          <Text style={styles.label}>{t('create.level')}</Text>
           <View style={styles.chipRow}>
             {LEVELS.map((item) => (
               <Chip
                 key={item}
-                label={LEVEL_LABELS[item]}
+                label={levelLabel(item, t)}
                 active={level === item}
                 onPress={() => setLevel(item)}
               />
             ))}
           </View>
 
-          <Text style={styles.label}>Формат</Text>
+          <Text style={styles.label}>{t('create.format')}</Text>
           <View style={styles.chipRow}>
             {FORMAT_CODES.map((item) => (
               <Chip
                 key={item}
-                label={FORMATS[item]}
+                label={t(`formats.${item}`)}
                 active={format === item}
                 onPress={() => setFormat(item)}
               />
@@ -173,7 +168,7 @@ const CreateEventPage: FC = () => {
           </View>
 
           <View style={styles.switchRow}>
-            <Text style={styles.label}>Бесплатное событие</Text>
+            <Text style={styles.label}>{t('create.freeEvent')}</Text>
             <Switch
               value={isFree}
               onValueChange={setIsFree}
@@ -185,12 +180,12 @@ const CreateEventPage: FC = () => {
               style={styles.input}
               value={price}
               onChangeText={setPrice}
-              placeholder="Цена, например 500 ₽"
+              placeholder={t('create.pricePlaceholder')}
               placeholderTextColor={colors.textMuted}
             />
           )}
 
-          <Text style={styles.label}>Дата и время</Text>
+          <Text style={styles.label}>{t('create.date')}</Text>
           <TextInput
             style={styles.input}
             value={dateText}
@@ -200,27 +195,27 @@ const CreateEventPage: FC = () => {
             autoCapitalize="none"
           />
 
-          <Text style={styles.label}>Место</Text>
+          <Text style={styles.label}>{t('create.venue')}</Text>
           <TextInput
             style={styles.input}
             value={venue}
             onChangeText={setVenue}
-            placeholder="Кафе, адрес или ссылка на Zoom"
+            placeholder={t('create.venuePlaceholder')}
             placeholderTextColor={colors.textMuted}
           />
 
-          <Text style={styles.label}>Обложка (ссылка, необязательно)</Text>
+          <Text style={styles.label}>{t('create.cover')}</Text>
           <TextInput
             style={styles.input}
             value={imageUrl}
             onChangeText={setImageUrl}
-            placeholder="https://… (иначе подберём автоматически)"
+            placeholder={t('create.coverPlaceholder')}
             placeholderTextColor={colors.textMuted}
             autoCapitalize="none"
             keyboardType="url"
           />
 
-          <Text style={styles.label}>Мест всего</Text>
+          <Text style={styles.label}>{t('create.capacity')}</Text>
           <TextInput
             style={styles.input}
             value={capacity}
@@ -231,7 +226,7 @@ const CreateEventPage: FC = () => {
           />
 
           <Pressable style={styles.submit} onPress={handleSubmit}>
-            <Text style={styles.submitLabel}>Опубликовать</Text>
+            <Text style={styles.submitLabel}>{t('create.submit')}</Text>
           </Pressable>
         </ScrollView>
       </KeyboardAvoidingView>

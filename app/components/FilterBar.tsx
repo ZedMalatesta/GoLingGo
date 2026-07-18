@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import {
   FORMAT_CODES,
-  FORMATS,
   LANGUAGE_CODES,
-  LANGUAGES,
-  LEVEL_LABELS,
+  LANGUAGE_FLAGS,
+  levelLabel,
   LEVELS,
 } from '../constants/catalogs';
 import { colors } from '../constants/colors';
@@ -15,6 +15,7 @@ import useAppStore from '../store/appStore';
 import Chip from './Chip';
 
 const FilterBar: FC = () => {
+  const { t } = useTranslation();
   const filters = useAppStore((state) => state.filters);
   const setFilters = useAppStore((state) => state.setFilters);
   const resetFilters = useAppStore((state) => state.resetFilters);
@@ -31,7 +32,7 @@ const FilterBar: FC = () => {
         {LANGUAGE_CODES.map((code) => (
           <Chip
             key={code}
-            label={`${LANGUAGES[code].flag} ${LANGUAGES[code].name}`}
+            label={`${LANGUAGE_FLAGS[code]} ${t(`languages.${code}`)}`}
             active={filters.language === code}
             onPress={() =>
               setFilters({
@@ -45,7 +46,7 @@ const FilterBar: FC = () => {
         {LEVELS.map((level) => (
           <Chip
             key={level}
-            label={LEVEL_LABELS[level]}
+            label={levelLabel(level, t)}
             active={filters.level === level}
             onPress={() =>
               setFilters({ level: filters.level === level ? null : level })
@@ -57,7 +58,7 @@ const FilterBar: FC = () => {
         {FORMAT_CODES.map((format) => (
           <Chip
             key={format}
-            label={FORMATS[format]}
+            label={t(`formats.${format}`)}
             active={filters.format === format}
             onPress={() =>
               setFilters({
@@ -67,14 +68,14 @@ const FilterBar: FC = () => {
           />
         ))}
         <Chip
-          label="Бесплатно"
+          label={t('filters.free')}
           active={filters.freeOnly}
           onPress={() => setFilters({ freeOnly: !filters.freeOnly })}
         />
       </ScrollView>
       {hasActiveFilters && (
         <Text style={styles.reset} onPress={resetFilters}>
-          Сбросить фильтры
+          {t('filters.reset')}
         </Text>
       )}
     </View>

@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import './app/i18n';
 import Routes from './app/Navigations/Routes';
 import useAppStore, { hydratedSelector } from './app/store/appStore';
 

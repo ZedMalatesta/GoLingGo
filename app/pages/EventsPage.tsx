@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useMemo } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -15,6 +16,7 @@ import {
 } from '../utils/notifications';
 
 const EventsPage: FC = () => {
+  const { t } = useTranslation();
   const filters = useAppStore((state) => state.filters);
   const rsvpIds = useAppStore((state) => state.rsvpIds);
   const reminders = useAppStore((state) => state.reminders);
@@ -66,10 +68,8 @@ const EventsPage: FC = () => {
         )}
         ListEmptyComponent={
           <View style={styles.empty}>
-            <Text style={styles.emptyTitle}>Ничего не нашлось</Text>
-            <Text style={styles.emptyText}>
-              Попробуйте смягчить фильтры — или создайте своё событие!
-            </Text>
+            <Text style={styles.emptyTitle}>{t('events.emptyTitle')}</Text>
+            <Text style={styles.emptyText}>{t('events.emptyText')}</Text>
           </View>
         }
       />

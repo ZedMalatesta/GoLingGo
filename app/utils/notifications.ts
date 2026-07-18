@@ -1,5 +1,6 @@
 import { Platform } from 'react-native';
 
+import i18n from '../i18n';
 import { LanguageEvent } from '../models/Event';
 
 export const REMINDER_OFFSET_MS = 2 * 60 * 60 * 1000;
@@ -44,8 +45,8 @@ export const scheduleEventReminder = async (
     }
     return await Notifications.scheduleNotificationAsync({
       content: {
-        title: `Через 2 часа: ${event.title}`,
-        body: `${event.venue} · не забудьте прийти!`,
+        title: i18n.t('notifications.reminderTitle', { title: event.title }),
+        body: i18n.t('notifications.reminderBody', { venue: event.venue }),
       },
       trigger: {
         type: Notifications.SchedulableTriggerInputTypes.DATE,
