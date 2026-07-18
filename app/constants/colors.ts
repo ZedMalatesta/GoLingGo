@@ -9,3 +9,16 @@ export const colors = {
   danger: '#ff3b30',
   border: '#e5e5ea',
 };
+
+// Sequential single-hue ramp for the attendee-level chart: A1 → C2 → native,
+// monotonic light-to-dark. Identity comes from the axis labels, color only
+// encodes progression, so adjacent steps may be close.
+export const levelRamp = [
+  '#a9c4f9',
+  '#86adf5',
+  '#6b99f3',
+  '#4a80ee',
+  '#2f6fed',
+  '#2258cf',
+  '#173f9e',
+] as const;

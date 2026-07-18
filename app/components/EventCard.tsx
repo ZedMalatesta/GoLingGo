@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +7,11 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { LANGUAGE_FLAGS, levelLabel } from '../constants/catalogs';
 import { colors } from '../constants/colors';
 import { AppLocale, LOCALE_TAGS } from '../i18n';
+import { emptyStats, mockAttendeeStats } from '../mocks/attendeeStats';
 import { LanguageEvent } from '../models/Event';
+import { AttendeeLevelCategory } from '../models/Profile';
+import useAppStore from '../store/appStore';
+import LevelStatsChart from './LevelStatsChart';
 
 interface EventCardProps {
   event: LanguageEvent;
@@ -29,7 +33,20 @@ export const formatEventDate = (dateISO: string, locale: string): string =>
 
 const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
   const { t, i18n } = useTranslation();
+  const profile = useAppStore((state) => state.profile);
+  const [showStats, setShowStats] = useState(false);
   const isFull = !isRsvped && event.attendees >= event.capacity;
+
+  const stats = mockAttendeeStats[event.id] ?? emptyStats;
+  const userLanguage = profile.languages.find(
+    (item) => item.code === event.language,
+  );
+  const userCategory: AttendeeLevelCategory | null =
+    isRsvped && userLanguage
+      ? userLanguage.role === 'native'
+        ? 'native'
+        : userLanguage.level
+      : null;
   const imageUrl =
     event.imageUrl ?? `https://picsum.photos/seed/${event.id}/600/320`;
 
@@ -82,6 +99,22 @@ const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
           })}
         </Text>
       </View>
+
+      <Pressable
+        style={styles.statsToggle}
+        onPress={() => setShowStats((value) => !value)}
+      >
+        <Ionicons name="stats-chart" size={14} color={colors.primary} />
+        <Text style={styles.statsToggleLabel}>{t('stats.title')}</Text>
+        <Ionicons
+          name={showStats ? 'chevron-up' : 'chevron-down'}
+          size={14}
+          color={colors.textMuted}
+        />
+      </Pressable>
+      {showStats && (
+        <LevelStatsChart stats={stats} userCategory={userCategory} />
+      )}
 
       <Pressable
         onPress={() => onToggleRsvp(event)}
@@ -176,6 +209,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.textMuted,
     flexShrink: 1,
+  },
+  statsToggle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+    gap: 6,
+  },
+  statsToggleLabel: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: colors.primary,
+    flex: 1,
   },
   rsvpButton: {
     marginTop: 12,

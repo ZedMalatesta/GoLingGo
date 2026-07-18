@@ -117,6 +117,12 @@ export default {
       'Wydarzenia dla każdego z Twoich języków — tak powstają krzyżujące się społeczności.',
     eventForms: ['wydarzenie', 'wydarzenia', 'wydarzeń'],
   },
+  stats: {
+    title: 'Poziomy uczestników',
+    empty: 'Brak jeszcze danych o poziomach uczestników',
+    nativeLegend: '★ — rodzimi użytkownicy języka',
+    youLegend: 'Twój poziom jest wyróżniony',
+  },
   notifications: {
     reminderTitle: 'Za 2 godziny: {{title}}',
     reminderBody: '{{venue}} · nie zapomnij przyjść!',

@@ -115,6 +115,12 @@ export default {
       "Events for each of your languages — that's how cross-communities are born.",
     eventForms: ['event', 'events'],
   },
+  stats: {
+    title: 'Attendee levels',
+    empty: 'No level data for attendees yet',
+    nativeLegend: '★ — native speakers',
+    youLegend: 'your level is highlighted',
+  },
   notifications: {
     reminderTitle: 'In 2 hours: {{title}}',
     reminderBody: "{{venue}} · don't forget to come!",

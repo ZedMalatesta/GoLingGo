@@ -10,6 +10,11 @@ export interface UserLanguage {
   level: ProficiencyLevel;
 }
 
+export type AttendeeLevelCategory = ProficiencyLevel | 'native';
+
+/** How many attendees of an event hold each level in its language. */
+export type AttendeeLevelStats = Record<AttendeeLevelCategory, number>;
+
 export interface UserProfile {
   name: string;
   city: string;
