@@ -123,6 +123,11 @@ export default {
     native: 'Носители',
     you: 'вы',
   },
+  reviews: {
+    title: 'Отзывы',
+    more: 'Ещё отзывы ({{count}})',
+    hide: 'Свернуть',
+  },
   notifications: {
     reminderTitle: 'Через 2 часа: {{title}}',
     reminderBody: '{{venue}} · не забудьте прийти!',

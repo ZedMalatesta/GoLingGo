@@ -11,6 +11,7 @@ import { emptyStats, mockAttendeeStats } from '../mocks/attendeeStats';
 import { LanguageEvent } from '../models/Event';
 import { AttendeeLevelCategory } from '../models/Profile';
 import useAppStore from '../store/appStore';
+import EventReviews from './EventReviews';
 import LevelStatsChart from './LevelStatsChart';
 
 interface EventCardProps {
@@ -103,6 +104,8 @@ const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
         <Text style={styles.statsTitle}>{t('stats.title')}</Text>
         <LevelStatsChart stats={stats} userCategory={userCategory} />
       </View>
+
+      <EventReviews eventId={event.id} />
 
       <Pressable
         onPress={() => onToggleRsvp(event)}

@@ -122,6 +122,11 @@ export default {
     native: 'Native speakers',
     you: 'you',
   },
+  reviews: {
+    title: 'Reviews',
+    more: 'More reviews ({{count}})',
+    hide: 'Show less',
+  },
   notifications: {
     reminderTitle: 'In 2 hours: {{title}}',
     reminderBody: "{{venue}} · don't forget to come!",

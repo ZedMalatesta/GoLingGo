@@ -123,6 +123,11 @@ export default {
     native: 'Носьбіты',
     you: 'вы',
   },
+  reviews: {
+    title: 'Водгукі',
+    more: 'Яшчэ водгукі ({{count}})',
+    hide: 'Згарнуць',
+  },
   notifications: {
     reminderTitle: 'Праз 2 гадзіны: {{title}}',
     reminderBody: '{{venue}} · не забудзьце прыйсці!',

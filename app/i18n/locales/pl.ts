@@ -124,6 +124,11 @@ export default {
     native: 'Rodzimi użytkownicy',
     you: 'ty',
   },
+  reviews: {
+    title: 'Opinie',
+    more: 'Więcej opinii ({{count}})',
+    hide: 'Zwiń',
+  },
   notifications: {
     reminderTitle: 'Za 2 godziny: {{title}}',
     reminderBody: '{{venue}} · nie zapomnij przyjść!',

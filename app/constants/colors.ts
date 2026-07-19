@@ -8,6 +8,7 @@ export const colors = {
   success: '#34c759',
   danger: '#ff3b30',
   border: '#e5e5ea',
+  star: '#f5a623',
 };
 
 // Sequential single-hue ramp for the attendee-level chart: A1 → C2 → native,
