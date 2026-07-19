@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   cover: {
-    height: 150,
+    height: 210,
     backgroundColor: colors.surface,
   },
   coverBadge: {
