@@ -37,15 +37,14 @@ export const cardShadow = {
   elevation: 4,
 } as const;
 
-// Sequential single-hue ink-indigo ramp for the attendee-level chart:
-// A1 → C2 → native, monotonic light-to-dark. Identity comes from the
-// labels, color only encodes progression, so adjacent steps may be close.
+// Multi-hue palette for the attendee-level chart (A1 → A2 → B1 → B2 → C1 → C2 → native).
+// Each step uses a distinct hue so adjacent slices are immediately distinguishable.
 export const levelRamp = [
-  '#bdc5f0',
-  '#9da9e8',
-  '#7e8ede',
-  '#6274d4',
-  '#4a5cc2',
-  '#3849a3',
-  '#252f7b',
+  '#4e8ef7', // A1  — vivid blue
+  '#26c6a2', // A2  — teal / mint
+  '#43c759', // B1  — fresh green
+  '#c9d629', // B2  — yellow-lime
+  '#f5a623', // C1  — warm amber
+  '#f0532d', // C2  — orange-red (matches app accent)
+  '#9b4fe8', // native — purple / violet
 ] as const;
