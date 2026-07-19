@@ -13,6 +13,7 @@ export default {
     it: 'Итальянский',
     pl: 'Польский',
     be: 'Белорусский',
+    pt: 'Португальский',
     ru: 'Русский',
     zh: 'Китайский',
   },
@@ -119,8 +120,8 @@ export default {
   stats: {
     title: 'Уровни участников',
     empty: 'Пока нет данных об уровнях участников',
-    nativeLegend: '★ — носители языка',
-    youLegend: 'выделен ваш уровень',
+    native: 'Носители',
+    you: 'вы',
   },
   notifications: {
     reminderTitle: 'Через 2 часа: {{title}}',

@@ -6,6 +6,7 @@ export type LanguageCode =
   | 'it'
   | 'pl'
   | 'be'
+  | 'pt'
   | 'ru'
   | 'zh';
 

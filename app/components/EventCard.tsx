@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
@@ -34,7 +34,6 @@ export const formatEventDate = (dateISO: string, locale: string): string =>
 const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
   const { t, i18n } = useTranslation();
   const profile = useAppStore((state) => state.profile);
-  const [showStats, setShowStats] = useState(false);
   const isFull = !isRsvped && event.attendees >= event.capacity;
 
   const stats = mockAttendeeStats[event.id] ?? emptyStats;
@@ -100,21 +99,10 @@ const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
         </Text>
       </View>
 
-      <Pressable
-        style={styles.statsToggle}
-        onPress={() => setShowStats((value) => !value)}
-      >
-        <Ionicons name="stats-chart" size={14} color={colors.primary} />
-        <Text style={styles.statsToggleLabel}>{t('stats.title')}</Text>
-        <Ionicons
-          name={showStats ? 'chevron-up' : 'chevron-down'}
-          size={14}
-          color={colors.textMuted}
-        />
-      </Pressable>
-      {showStats && (
+      <View style={styles.statsSection}>
+        <Text style={styles.statsTitle}>{t('stats.title')}</Text>
         <LevelStatsChart stats={stats} userCategory={userCategory} />
-      )}
+      </View>
 
       <Pressable
         onPress={() => onToggleRsvp(event)}
@@ -210,17 +198,16 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     flexShrink: 1,
   },
-  statsToggle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-    gap: 6,
+  statsSection: {
+    marginTop: 12,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
   },
-  statsToggleLabel: {
+  statsTitle: {
     fontSize: 13,
     fontWeight: '600',
-    color: colors.primary,
-    flex: 1,
+    color: colors.text,
   },
   rsvpButton: {
     marginTop: 12,

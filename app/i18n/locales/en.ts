@@ -13,6 +13,7 @@ export default {
     it: 'Italian',
     pl: 'Polish',
     be: 'Belarusian',
+    pt: 'Portuguese',
     ru: 'Russian',
     zh: 'Chinese',
   },
@@ -118,8 +119,8 @@ export default {
   stats: {
     title: 'Attendee levels',
     empty: 'No level data for attendees yet',
-    nativeLegend: '★ — native speakers',
-    youLegend: 'your level is highlighted',
+    native: 'Native speakers',
+    you: 'you',
   },
   notifications: {
     reminderTitle: 'In 2 hours: {{title}}',

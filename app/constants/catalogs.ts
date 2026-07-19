@@ -13,6 +13,7 @@ export const LANGUAGE_FLAGS: Record<LanguageCode, string> = {
   it: '🇮🇹',
   pl: '🇵🇱',
   be: '🇧🇾',
+  pt: '🇵🇹',
   ru: '🇷🇺',
   zh: '🇨🇳',
 };

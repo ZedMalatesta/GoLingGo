@@ -13,6 +13,7 @@ export default {
     it: 'Włoski',
     pl: 'Polski',
     be: 'Białoruski',
+    pt: 'Portugalski',
     ru: 'Rosyjski',
     zh: 'Chiński',
   },
@@ -120,8 +121,8 @@ export default {
   stats: {
     title: 'Poziomy uczestników',
     empty: 'Brak jeszcze danych o poziomach uczestników',
-    nativeLegend: '★ — rodzimi użytkownicy języka',
-    youLegend: 'Twój poziom jest wyróżniony',
+    native: 'Rodzimi użytkownicy',
+    you: 'ty',
   },
   notifications: {
     reminderTitle: 'Za 2 godziny: {{title}}',
