@@ -20,6 +20,7 @@ export default {
     calendar: 'Каляндар',
     create: 'Стварыць',
     myEvents: 'Мае сустрэчы',
+    past: 'Мінулыя',
     profile: 'Профіль',
   },
   languages: {

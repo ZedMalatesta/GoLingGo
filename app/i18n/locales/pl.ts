@@ -20,6 +20,7 @@ export default {
     calendar: 'Kalendarz',
     create: 'Utwórz',
     myEvents: 'Moje spotkania',
+    past: 'Minione',
     profile: 'Profil',
   },
   languages: {

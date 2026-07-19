@@ -7,11 +7,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AppHeader from '../components/AppHeader';
 import EventCard from '../components/EventCard';
 import FilterBar from '../components/FilterBar';
-import PastEventCard from '../components/PastEventCard';
-import { bodyFont, colors, handFont } from '../constants/colors';
+import { bodyFont, colors } from '../constants/colors';
 import useToggleRsvp from '../hooks/useToggleRsvp';
 import { mockEvents } from '../mocks/events';
-import { mockPastAnalytics, mockPastEvents } from '../mocks/pastEvents';
 import { EventFilters, LanguageEvent } from '../models/Event';
 import useAppStore from '../store/appStore';
 
@@ -37,17 +35,6 @@ const EventsPage: FC = () => {
     return all.filter((event) => matchesFilters(event, filters));
   }, [filters, myEvents]);
 
-  const pastEvents = useMemo(
-    () =>
-      [...mockPastEvents]
-        .sort(
-          (a, b) =>
-            new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime(),
-        )
-        .filter((event) => matchesFilters(event, filters)),
-    [filters],
-  );
-
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <AppHeader />
@@ -68,20 +55,6 @@ const EventsPage: FC = () => {
             <Text style={styles.emptyTitle}>{t('events.emptyTitle')}</Text>
             <Text style={styles.emptyText}>{t('events.emptyText')}</Text>
           </View>
-        }
-        ListFooterComponent={
-          pastEvents.length > 0 ? (
-            <View>
-              <Text style={styles.pastTitle}>🕗 {t('past.title')}</Text>
-              {pastEvents.map((event) => (
-                <PastEventCard
-                  key={event.id}
-                  event={event}
-                  analytics={mockPastAnalytics[event.id]}
-                />
-              ))}
-            </View>
-          ) : null
         }
       />
     </SafeAreaView>
@@ -113,13 +86,6 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     textAlign: 'center',
     marginTop: 8,
-  },
-  pastTitle: {
-    fontFamily: handFont,
-    fontSize: 27,
-    color: colors.primaryDark,
-    marginTop: 26,
-    marginHorizontal: 16,
   },
 });
 

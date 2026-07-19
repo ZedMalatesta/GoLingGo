@@ -20,6 +20,7 @@ export default {
     calendar: 'Календарь',
     create: 'Создать',
     myEvents: 'Мои встречи',
+    past: 'Прошедшие',
     profile: 'Профиль',
   },
   languages: {

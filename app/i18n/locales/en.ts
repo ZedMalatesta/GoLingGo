@@ -20,6 +20,7 @@ export default {
     calendar: 'Calendar',
     create: 'Create',
     myEvents: 'My meetups',
+    past: 'Past',
     profile: 'Profile',
   },
   languages: {

@@ -10,6 +10,7 @@ import CalendarPage from '../pages/CalendarPage';
 import CreateEventPage from '../pages/CreateEventPage';
 import EventsPage from '../pages/EventsPage';
 import MyEventsPage from '../pages/MyEventsPage';
+import PastEventsPage from '../pages/PastEventsPage';
 import ProfilePage from '../pages/ProfilePage';
 
 export type RootTabParamList = {
@@ -17,6 +18,7 @@ export type RootTabParamList = {
   Calendar: undefined;
   Create: undefined;
   MyEvents: undefined;
+  Past: undefined;
   Profile: undefined;
 };
 
@@ -28,6 +30,7 @@ const tabIcons: Record<keyof RootTabParamList, keyof typeof Ionicons.glyphMap> =
     Calendar: 'calendar',
     Create: 'add-circle',
     MyEvents: 'ticket',
+    Past: 'time',
     Profile: 'person',
   };
 
@@ -36,6 +39,7 @@ const tabTitleKeys: Record<keyof RootTabParamList, string> = {
   Calendar: 'tabs.calendar',
   Create: 'tabs.create',
   MyEvents: 'tabs.myEvents',
+  Past: 'tabs.past',
   Profile: 'tabs.profile',
 };
 
@@ -77,6 +81,7 @@ const Routes: FC = () => {
         <Tab.Screen name="Calendar" component={CalendarPage} />
         <Tab.Screen name="Create" component={CreateEventPage} />
         <Tab.Screen name="MyEvents" component={MyEventsPage} />
+        <Tab.Screen name="Past" component={PastEventsPage} />
         <Tab.Screen name="Profile" component={ProfilePage} />
       </Tab.Navigator>
     </NavigationContainer>
