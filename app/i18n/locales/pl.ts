@@ -2,8 +2,12 @@ export default {
   header: {
     tagline: 'Spotkania językowe w Twoim mieście',
   },
+  calendar: {
+    empty: 'Brak wydarzeń w tym dniu — wybierz dzień z kropką.',
+  },
   tabs: {
     events: 'Wydarzenia',
+    calendar: 'Kalendarz',
     create: 'Utwórz',
     myEvents: 'Moje spotkania',
     profile: 'Profil',

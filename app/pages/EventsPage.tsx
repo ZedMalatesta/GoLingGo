@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
@@ -8,22 +8,16 @@ import AppHeader from '../components/AppHeader';
 import EventCard from '../components/EventCard';
 import FilterBar from '../components/FilterBar';
 import { colors } from '../constants/colors';
+import useToggleRsvp from '../hooks/useToggleRsvp';
 import { mockEvents } from '../mocks/events';
-import { LanguageEvent } from '../models/Event';
 import useAppStore from '../store/appStore';
-import {
-  cancelEventReminder,
-  scheduleEventReminder,
-} from '../utils/notifications';
 
 const EventsPage: FC = () => {
   const { t } = useTranslation();
   const filters = useAppStore((state) => state.filters);
   const rsvpIds = useAppStore((state) => state.rsvpIds);
-  const reminders = useAppStore((state) => state.reminders);
   const myEvents = useAppStore((state) => state.myEvents);
-  const rsvp = useAppStore((state) => state.rsvp);
-  const cancelRsvp = useAppStore((state) => state.cancelRsvp);
+  const handleToggleRsvp = useToggleRsvp();
 
   const events = useMemo(() => {
     const all = [...myEvents, ...mockEvents].sort(
@@ -39,19 +33,6 @@ const EventsPage: FC = () => {
         (!filters.freeOnly || event.isFree),
     );
   }, [filters, myEvents]);
-
-  const handleToggleRsvp = useCallback(
-    async (event: LanguageEvent) => {
-      if (rsvpIds.includes(event.id)) {
-        cancelRsvp(event.id);
-        await cancelEventReminder(reminders[event.id]);
-      } else {
-        const reminderId = await scheduleEventReminder(event);
-        rsvp(event.id, reminderId);
-      }
-    },
-    [rsvpIds, reminders, rsvp, cancelRsvp],
-  );
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>

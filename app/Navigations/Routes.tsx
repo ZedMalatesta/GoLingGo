@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
 import { colors } from '../constants/colors';
+import CalendarPage from '../pages/CalendarPage';
 import CreateEventPage from '../pages/CreateEventPage';
 import EventsPage from '../pages/EventsPage';
 import MyEventsPage from '../pages/MyEventsPage';
@@ -13,6 +14,7 @@ import ProfilePage from '../pages/ProfilePage';
 
 export type RootTabParamList = {
   Events: undefined;
+  Calendar: undefined;
   Create: undefined;
   MyEvents: undefined;
   Profile: undefined;
@@ -23,13 +25,15 @@ const Tab = createBottomTabNavigator<RootTabParamList>();
 const tabIcons: Record<keyof RootTabParamList, keyof typeof Ionicons.glyphMap> =
   {
     Events: 'compass',
+    Calendar: 'calendar',
     Create: 'add-circle',
-    MyEvents: 'calendar',
+    MyEvents: 'ticket',
     Profile: 'person',
   };
 
 const tabTitleKeys: Record<keyof RootTabParamList, string> = {
   Events: 'tabs.events',
+  Calendar: 'tabs.calendar',
   Create: 'tabs.create',
   MyEvents: 'tabs.myEvents',
   Profile: 'tabs.profile',
@@ -66,6 +70,7 @@ const Routes: FC = () => {
         })}
       >
         <Tab.Screen name="Events" component={EventsPage} />
+        <Tab.Screen name="Calendar" component={CalendarPage} />
         <Tab.Screen name="Create" component={CreateEventPage} />
         <Tab.Screen name="MyEvents" component={MyEventsPage} />
         <Tab.Screen name="Profile" component={ProfilePage} />

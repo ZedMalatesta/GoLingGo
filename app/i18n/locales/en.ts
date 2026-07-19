@@ -2,8 +2,12 @@ export default {
   header: {
     tagline: 'Language meetups in your city',
   },
+  calendar: {
+    empty: 'No events on this day — pick a day with a dot.',
+  },
   tabs: {
     events: 'Events',
+    calendar: 'Calendar',
     create: 'Create',
     myEvents: 'My meetups',
     profile: 'Profile',

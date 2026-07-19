@@ -2,8 +2,12 @@ export default {
   header: {
     tagline: 'Моўныя сустрэчы ў тваім горадзе',
   },
+  calendar: {
+    empty: 'У гэты дзень падзей няма — выберыце дзень з кропкай.',
+  },
   tabs: {
     events: 'Падзеі',
+    calendar: 'Каляндар',
     create: 'Стварыць',
     myEvents: 'Мае сустрэчы',
     profile: 'Профіль',

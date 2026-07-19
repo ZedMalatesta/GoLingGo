@@ -2,8 +2,12 @@ export default {
   header: {
     tagline: 'Языковые встречи в твоём городе',
   },
+  calendar: {
+    empty: 'В этот день событий нет — выберите день с точкой.',
+  },
   tabs: {
     events: 'События',
+    calendar: 'Календарь',
     create: 'Создать',
     myEvents: 'Мои встречи',
     profile: 'Профиль',
