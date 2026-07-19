@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AppHeader from '../components/AppHeader';
 import EventCard from '../components/EventCard';
 import FilterBar from '../components/FilterBar';
-import { colors } from '../constants/colors';
+import { bodyFont, colors } from '../constants/colors';
 import useToggleRsvp from '../hooks/useToggleRsvp';
 import { mockEvents } from '../mocks/events';
 import useAppStore from '../store/appStore';
@@ -74,11 +74,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
   },
   emptyTitle: {
+    fontFamily: bodyFont.bold,
     fontSize: 17,
     fontWeight: '700',
     color: colors.text,
   },
   emptyText: {
+    fontFamily: bodyFont.regular,
     fontSize: 14,
     color: colors.textMuted,
     textAlign: 'center',

@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { colors, handFont } from '../constants/colors';
+import { bodyFont, colors, handFont } from '../constants/colors';
 import { AppLocale, LOCALE_TAGS } from '../i18n';
 import { mockReviews } from '../mocks/reviews';
 import { EventReview } from '../models/Review';
@@ -114,11 +114,13 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   average: {
+    fontFamily: bodyFont.bold,
     fontSize: 13,
     fontWeight: '700',
     color: colors.text,
   },
   count: {
+    fontFamily: bodyFont.regular,
     fontSize: 12,
     color: colors.textMuted,
   },
@@ -144,11 +146,13 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   author: {
+    fontFamily: bodyFont.semibold,
     fontSize: 13,
     fontWeight: '600',
     color: colors.text,
   },
   levelBadge: {
+    fontFamily: bodyFont.semibold,
     fontSize: 10,
     fontWeight: '600',
     color: colors.primaryDark,
@@ -159,6 +163,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   date: {
+    fontFamily: bodyFont.regular,
     fontSize: 11,
     color: colors.textMuted,
     marginLeft: 'auto',
@@ -169,12 +174,14 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   text: {
+    fontFamily: bodyFont.regular,
     fontSize: 12,
     color: colors.text,
     lineHeight: 17,
     marginTop: 3,
   },
   more: {
+    fontFamily: bodyFont.semibold,
     fontSize: 12,
     fontWeight: '600',
     color: colors.primary,

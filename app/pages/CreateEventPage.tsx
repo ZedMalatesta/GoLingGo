@@ -23,7 +23,7 @@ import {
   levelLabel,
   LEVELS,
 } from '../constants/catalogs';
-import { colors, handFont } from '../constants/colors';
+import { bodyFont, colors, handFont } from '../constants/colors';
 import { EventFormat, LanguageCode, Level } from '../models/Event';
 import useAppStore from '../store/appStore';
 
@@ -249,12 +249,14 @@ const styles = StyleSheet.create({
     color: colors.primaryDark,
   },
   subheading: {
+    fontFamily: bodyFont.regular,
     fontSize: 13,
     color: colors.textMuted,
     marginTop: 4,
     marginBottom: 8,
   },
   label: {
+    fontFamily: bodyFont.semibold,
     fontSize: 13,
     fontWeight: '600',
     color: colors.text,
@@ -262,6 +264,7 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   input: {
+    fontFamily: bodyFont.regular,
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: 10,
@@ -293,6 +296,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   submitLabel: {
+    fontFamily: bodyFont.bold,
     color: colors.background,
     fontSize: 16,
     fontWeight: '700',

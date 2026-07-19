@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { LANGUAGE_FLAGS, levelLabel } from '../constants/catalogs';
-import { cardShadow, colors, handFont } from '../constants/colors';
+import { bodyFont, cardShadow, colors, handFont } from '../constants/colors';
 import { AppLocale, LOCALE_TAGS } from '../i18n';
 import { emptyStats, mockAttendeeStats } from '../mocks/attendeeStats';
 import { LanguageEvent } from '../models/Event';
@@ -175,9 +175,11 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '2deg' }],
   },
   coverFlag: {
+    fontFamily: bodyFont.regular,
     fontSize: 16,
   },
   coverPrice: {
+    fontFamily: bodyFont.bold,
     fontSize: 12,
     fontWeight: '700',
     color: colors.text,
@@ -189,12 +191,14 @@ const styles = StyleSheet.create({
     padding: 14,
   },
   title: {
+    fontFamily: bodyFont.extrabold,
     fontSize: 17,
     fontWeight: '800',
     color: colors.text,
     letterSpacing: -0.2,
   },
   organizer: {
+    fontFamily: bodyFont.regular,
     fontSize: 12,
     color: colors.textMuted,
     marginTop: 2,
@@ -206,6 +210,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   badge: {
+    fontFamily: bodyFont.semibold,
     fontSize: 11,
     fontWeight: '600',
     color: colors.primaryDark,
@@ -218,6 +223,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   description: {
+    fontFamily: bodyFont.regular,
     fontSize: 13,
     color: colors.text,
     marginTop: 10,
@@ -230,6 +236,7 @@ const styles = StyleSheet.create({
     gap: 7,
   },
   meta: {
+    fontFamily: bodyFont.regular,
     fontSize: 12,
     color: colors.textMuted,
     flexShrink: 1,
@@ -274,6 +281,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border,
   },
   rsvpLabel: {
+    fontFamily: bodyFont.bold,
     color: colors.background,
     fontWeight: '700',
     fontSize: 14,

@@ -6,7 +6,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import EventCard from '../components/EventCard';
-import { cardShadow, colors, handFont } from '../constants/colors';
+import { bodyFont, cardShadow, colors, handFont } from '../constants/colors';
 import useToggleRsvp from '../hooks/useToggleRsvp';
 import { AppLocale, LOCALE_TAGS } from '../i18n';
 import { mockEvents } from '../mocks/events';
@@ -215,6 +215,7 @@ const styles = StyleSheet.create({
     marginVertical: 2,
   },
   weekday: {
+    fontFamily: bodyFont.bold,
     fontSize: 11,
     fontWeight: '700',
     color: colors.textMuted,
@@ -236,6 +237,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   dayLabel: {
+    fontFamily: bodyFont.regular,
     fontSize: 13,
     color: colors.text,
   },
@@ -257,6 +259,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   empty: {
+    fontFamily: bodyFont.regular,
     fontSize: 14,
     color: colors.textMuted,
     textAlign: 'center',

@@ -10,7 +10,7 @@ import {
   levelLabel,
   LEVELS,
 } from '../constants/catalogs';
-import { colors } from '../constants/colors';
+import { bodyFont, colors } from '../constants/colors';
 import useAppStore from '../store/appStore';
 import Chip from './Chip';
 
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   reset: {
+    fontFamily: bodyFont.semibold,
     color: colors.primary,
     fontSize: 13,
     fontWeight: '600',

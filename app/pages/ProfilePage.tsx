@@ -20,7 +20,7 @@ import {
   LANGUAGE_FLAGS,
   PROFICIENCY_LEVELS,
 } from '../constants/catalogs';
-import { colors, handFont } from '../constants/colors';
+import { bodyFont, colors, handFont } from '../constants/colors';
 import { APP_LOCALES } from '../i18n';
 import { pluralForm } from '../i18n/plural';
 import { mockEvents } from '../mocks/events';
@@ -261,6 +261,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   heroAvatarEmoji: {
+    fontFamily: bodyFont.regular,
     fontSize: 30,
   },
   headerText: {
@@ -272,10 +273,12 @@ const styles = StyleSheet.create({
     color: colors.background,
   },
   heroDoodle: {
+    fontFamily: bodyFont.regular,
     fontSize: 22,
     transform: [{ rotate: '8deg' }],
   },
   heroCity: {
+    fontFamily: bodyFont.regular,
     fontSize: 13,
     color: 'rgba(255,255,255,0.85)',
     marginTop: 3,
@@ -300,6 +303,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   avatarEmoji: {
+    fontFamily: bodyFont.regular,
     fontSize: 22,
   },
   inputMultiline: {
@@ -307,6 +311,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
   label: {
+    fontFamily: bodyFont.semibold,
     fontSize: 13,
     fontWeight: '600',
     color: colors.text,
@@ -314,6 +319,7 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   input: {
+    fontFamily: bodyFont.regular,
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: 10,
@@ -330,6 +336,7 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   hint: {
+    fontFamily: bodyFont.regular,
     fontSize: 12,
     color: colors.textMuted,
     marginTop: 4,
@@ -348,6 +355,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   languageName: {
+    fontFamily: bodyFont.regular,
     fontSize: 15,
     color: colors.text,
     flex: 1,
@@ -362,6 +370,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.success,
   },
   roleLabel: {
+    fontFamily: bodyFont.semibold,
     fontSize: 12,
     color: colors.text,
     fontWeight: '600',
@@ -376,6 +385,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   levelLabel: {
+    fontFamily: bodyFont.semibold,
     fontSize: 12,
     color: colors.background,
     fontWeight: '600',
@@ -395,6 +405,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   communityCount: {
+    fontFamily: bodyFont.regular,
     fontSize: 14,
     color: colors.textMuted,
   },

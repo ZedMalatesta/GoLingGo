@@ -5,7 +5,7 @@ import { Platform, SectionList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import EventCard from '../components/EventCard';
-import { colors, handFont } from '../constants/colors';
+import { bodyFont, colors, handFont } from '../constants/colors';
 import { mockEvents } from '../mocks/events';
 import { LanguageEvent } from '../models/Event';
 import useAppStore from '../store/appStore';
@@ -103,12 +103,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   emptyText: {
+    fontFamily: bodyFont.regular,
     fontSize: 14,
     color: colors.textMuted,
     marginTop: 8,
     marginHorizontal: 16,
   },
   reminderNote: {
+    fontFamily: bodyFont.regular,
     fontSize: 12,
     color: colors.textMuted,
     marginHorizontal: 24,

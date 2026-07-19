@@ -19,6 +19,15 @@ export const colors = {
 // Latin-ext and Cyrillic, so it works in all four UI locales.
 export const handFont = 'Caveat_700Bold';
 
+// Rounded body font matching the doodle look without being handwritten;
+// per-weight families as required by expo-font.
+export const bodyFont = {
+  regular: 'Nunito_400Regular',
+  semibold: 'Nunito_600SemiBold',
+  bold: 'Nunito_700Bold',
+  extrabold: 'Nunito_800ExtraBold',
+} as const;
+
 // Soft elevation used by cards and floating surfaces.
 export const cardShadow = {
   shadowColor: '#232f7a',

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle, G } from 'react-native-svg';
 
-import { colors, levelRamp } from '../constants/colors';
+import { bodyFont, colors, levelRamp } from '../constants/colors';
 import {
   AttendeeLevelCategory,
   AttendeeLevelStats,
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   total: {
+    fontFamily: bodyFont.bold,
     fontSize: 22,
     fontWeight: '700',
     color: colors.text,
@@ -151,6 +152,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   legendLabel: {
+    fontFamily: bodyFont.regular,
     fontSize: 12,
     color: colors.text,
     flex: 1,
@@ -160,10 +162,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   legendCount: {
+    fontFamily: bodyFont.regular,
     fontSize: 12,
     color: colors.textMuted,
   },
   empty: {
+    fontFamily: bodyFont.regular,
     fontSize: 12,
     color: colors.textMuted,
     marginTop: 8,

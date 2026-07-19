@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
-import { colors } from '../constants/colors';
+import { bodyFont, colors } from '../constants/colors';
 import CalendarPage from '../pages/CalendarPage';
 import CreateEventPage from '../pages/CreateEventPage';
 import EventsPage from '../pages/EventsPage';
@@ -50,7 +50,11 @@ const Routes: FC = () => {
           title: t(tabTitleKeys[route.name as keyof RootTabParamList]),
           tabBarActiveTintColor: colors.primary,
           tabBarInactiveTintColor: colors.textMuted,
-          tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
+          tabBarLabelStyle: {
+            fontFamily: bodyFont.bold,
+            fontSize: 11,
+            fontWeight: '600',
+          },
           tabBarStyle: {
             borderTopWidth: 0,
             backgroundColor: colors.background,

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { Pressable, StyleSheet, Text } from 'react-native';
 
-import { colors } from '../constants/colors';
+import { bodyFont, colors } from '../constants/colors';
 
 interface ChipProps {
   label: string;
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
   },
   label: {
+    fontFamily: bodyFont.semibold,
     fontSize: 13,
     fontWeight: '500',
     color: colors.text,

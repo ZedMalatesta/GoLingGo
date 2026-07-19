@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { colors, handFont } from '../constants/colors';
+import { bodyFont, colors, handFont } from '../constants/colors';
 
 const AppHeader: FC = () => {
   const { t } = useTranslation();
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     color: colors.accent,
   },
   doodles: {
+    fontFamily: bodyFont.regular,
     fontSize: 16,
     letterSpacing: 4,
   },
