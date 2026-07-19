@@ -1,4 +1,7 @@
 export default {
+  header: {
+    tagline: 'Языковые встречи в твоём городе',
+  },
   tabs: {
     events: 'События',
     create: 'Создать',

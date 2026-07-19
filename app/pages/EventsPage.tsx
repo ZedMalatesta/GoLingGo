@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import AppHeader from '../components/AppHeader';
 import EventCard from '../components/EventCard';
 import FilterBar from '../components/FilterBar';
 import { colors } from '../constants/colors';
@@ -54,6 +55,7 @@ const EventsPage: FC = () => {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
+      <AppHeader />
       <FilterBar />
       <FlatList
         data={events}

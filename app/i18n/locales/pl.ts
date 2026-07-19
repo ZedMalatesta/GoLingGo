@@ -1,4 +1,7 @@
 export default {
+  header: {
+    tagline: 'Spotkania językowe w Twoim mieście',
+  },
   tabs: {
     events: 'Wydarzenia',
     create: 'Utwórz',

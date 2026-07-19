@@ -74,13 +74,15 @@ const ProfilePage: FC = () => {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.headerRow}>
-          <Text style={styles.avatarCurrent}>{profile.avatar}</Text>
+        <View style={styles.hero}>
+          <View style={styles.heroAvatar}>
+            <Text style={styles.heroAvatarEmoji}>{profile.avatar}</Text>
+          </View>
           <View style={styles.headerText}>
-            <Text style={styles.heading}>
+            <Text style={styles.heroName}>
               {profile.name.trim() || t('profile.title')}
             </Text>
-            <Text style={styles.headerCity}>{profile.city}</Text>
+            <Text style={styles.heroCity}>📍 {profile.city}</Text>
           </View>
         </View>
 
@@ -241,26 +243,38 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingBottom: 32,
   },
-  heading: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: colors.text,
-  },
-  headerRow: {
+  hero: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: 14,
+    backgroundColor: colors.primary,
+    borderRadius: 18,
+    padding: 16,
+  },
+  heroAvatar: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: 'rgba(255,255,255,0.25)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  heroAvatarEmoji: {
+    fontSize: 30,
   },
   headerText: {
     flex: 1,
   },
-  headerCity: {
-    fontSize: 13,
-    color: colors.textMuted,
-    marginTop: 2,
+  heroName: {
+    fontSize: 20,
+    fontWeight: '800',
+    color: colors.background,
+    letterSpacing: -0.3,
   },
-  avatarCurrent: {
-    fontSize: 40,
+  heroCity: {
+    fontSize: 13,
+    color: 'rgba(255,255,255,0.85)',
+    marginTop: 3,
   },
   avatarRow: {
     flexDirection: 'row',

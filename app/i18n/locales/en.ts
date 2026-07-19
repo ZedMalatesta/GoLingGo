@@ -1,4 +1,7 @@
 export default {
+  header: {
+    tagline: 'Language meetups in your city',
+  },
   tabs: {
     events: 'Events',
     create: 'Create',

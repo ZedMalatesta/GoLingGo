@@ -46,6 +46,16 @@ const Routes: FC = () => {
           title: t(tabTitleKeys[route.name as keyof RootTabParamList]),
           tabBarActiveTintColor: colors.primary,
           tabBarInactiveTintColor: colors.textMuted,
+          tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
+          tabBarStyle: {
+            borderTopWidth: 0,
+            backgroundColor: colors.background,
+            shadowColor: '#16295c',
+            shadowOffset: { width: 0, height: -4 },
+            shadowOpacity: 0.06,
+            shadowRadius: 12,
+            elevation: 12,
+          },
           tabBarIcon: ({ color, size }) => (
             <Ionicons
               name={tabIcons[route.name as keyof RootTabParamList]}
