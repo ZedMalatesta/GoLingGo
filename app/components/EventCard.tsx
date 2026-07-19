@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   },
   coverFlag: {
     fontFamily: bodyFont.regular,
-    fontSize: 16,
+    fontSize: 32,
   },
   coverPrice: {
     fontFamily: bodyFont.bold,
