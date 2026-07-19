@@ -2,6 +2,16 @@ export default {
   header: {
     tagline: 'Spotkania językowe w Twoim mieście',
   },
+  past: {
+    title: 'Minione wydarzenia',
+    badge: 'Zakończone',
+    attended: '{{attended}} z {{rsvps}} zapisanych dotarło',
+    sentiment: 'nastrój {{percent}}%',
+    noShow: 'no-show {{percent}}%',
+    aiTitle: 'Analiza AI',
+    aiDisclaimer:
+      'Wygenerowano przez AI na podstawie opinii, frekwencji i rozmów po wydarzeniu.',
+  },
   calendar: {
     empty: 'Brak wydarzeń w tym dniu — wybierz dzień z kropką.',
   },

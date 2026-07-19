@@ -2,6 +2,16 @@ export default {
   header: {
     tagline: 'Языковые встречи в твоём городе',
   },
+  past: {
+    title: 'Прошедшие события',
+    badge: 'Завершено',
+    attended: 'Пришли {{attended}} из {{rsvps}} записавшихся',
+    sentiment: 'настрой {{percent}}%',
+    noShow: 'no-show {{percent}}%',
+    aiTitle: 'ИИ-анализ',
+    aiDisclaimer:
+      'Сгенерировано ИИ на основе отзывов, посещаемости и обсуждений после события.',
+  },
   calendar: {
     empty: 'В этот день событий нет — выберите день с точкой.',
   },

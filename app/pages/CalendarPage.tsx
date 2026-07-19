@@ -6,10 +6,12 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import EventCard from '../components/EventCard';
+import PastEventCard from '../components/PastEventCard';
 import { bodyFont, cardShadow, colors, handFont } from '../constants/colors';
 import useToggleRsvp from '../hooks/useToggleRsvp';
 import { AppLocale, LOCALE_TAGS } from '../i18n';
 import { mockEvents } from '../mocks/events';
+import { mockPastAnalytics, mockPastEvents } from '../mocks/pastEvents';
 import useAppStore from '../store/appStore';
 
 const dateKey = (date: Date): string =>
@@ -53,7 +55,7 @@ const CalendarPage: FC = () => {
 
   const eventsByDay = useMemo(() => {
     const map: Record<string, number> = {};
-    [...myEvents, ...mockEvents].forEach((event) => {
+    [...myEvents, ...mockEvents, ...mockPastEvents].forEach((event) => {
       const key = dateKey(new Date(event.dateISO));
       map[key] = (map[key] ?? 0) + 1;
     });
@@ -62,7 +64,7 @@ const CalendarPage: FC = () => {
 
   const dayEvents = useMemo(
     () =>
-      [...myEvents, ...mockEvents]
+      [...myEvents, ...mockEvents, ...mockPastEvents]
         .filter((event) => dateKey(new Date(event.dateISO)) === selectedKey)
         .sort(
           (a, b) =>
@@ -158,13 +160,20 @@ const CalendarPage: FC = () => {
         keyExtractor={(event) => event.id}
         contentContainerStyle={styles.list}
         ListHeaderComponent={calendar}
-        renderItem={({ item }) => (
-          <EventCard
-            event={item}
-            isRsvped={rsvpIds.includes(item.id)}
-            onToggleRsvp={handleToggleRsvp}
-          />
-        )}
+        renderItem={({ item }) =>
+          mockPastAnalytics[item.id] ? (
+            <PastEventCard
+              event={item}
+              analytics={mockPastAnalytics[item.id]}
+            />
+          ) : (
+            <EventCard
+              event={item}
+              isRsvped={rsvpIds.includes(item.id)}
+              onToggleRsvp={handleToggleRsvp}
+            />
+          )
+        }
         ListEmptyComponent={
           <Text style={styles.empty}>{t('calendar.empty')}</Text>
         }

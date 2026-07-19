@@ -2,6 +2,16 @@ export default {
   header: {
     tagline: 'Моўныя сустрэчы ў тваім горадзе',
   },
+  past: {
+    title: 'Мінулыя падзеі',
+    badge: 'Завершана',
+    attended: 'Прыйшлі {{attended}} з {{rsvps}} запісаных',
+    sentiment: 'настрой {{percent}}%',
+    noShow: 'no-show {{percent}}%',
+    aiTitle: 'АІ-аналіз',
+    aiDisclaimer:
+      'Згенеравана АІ на аснове водгукаў, наведвальнасці і абмеркаванняў пасля падзеі.',
+  },
   calendar: {
     empty: 'У гэты дзень падзей няма — выберыце дзень з кропкай.',
   },

@@ -2,6 +2,16 @@ export default {
   header: {
     tagline: 'Language meetups in your city',
   },
+  past: {
+    title: 'Past events',
+    badge: 'Finished',
+    attended: '{{attended}} of {{rsvps}} RSVPs showed up',
+    sentiment: 'sentiment {{percent}}%',
+    noShow: 'no-show {{percent}}%',
+    aiTitle: 'AI analysis',
+    aiDisclaimer:
+      'AI-generated from reviews, attendance, and post-event conversations.',
+  },
   calendar: {
     empty: 'No events on this day — pick a day with a dot.',
   },
