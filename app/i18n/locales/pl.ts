@@ -62,7 +62,7 @@ export default {
     subheading:
       'Publikacja zajmuje kilka minut — wypełnij formularz, a wydarzenie od razu pojawi się na liście.',
     title: 'Nazwa',
-    titlePlaceholder: 'English Speaking Club',
+    titlePlaceholder: 'Klub konwersacyjny angielskiego',
     description: 'Opis',
     descriptionPlaceholder: 'O czym jest spotkanie i dla kogo',
     language: 'Język',

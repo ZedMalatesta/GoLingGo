@@ -20,7 +20,7 @@ import {
   LANGUAGE_FLAGS,
   PROFICIENCY_LEVELS,
 } from '../constants/catalogs';
-import { colors } from '../constants/colors';
+import { colors, handFont } from '../constants/colors';
 import { APP_LOCALES } from '../i18n';
 import { pluralForm } from '../i18n/plural';
 import { mockEvents } from '../mocks/events';
@@ -84,6 +84,7 @@ const ProfilePage: FC = () => {
             </Text>
             <Text style={styles.heroCity}>📍 {profile.city}</Text>
           </View>
+          <Text style={styles.heroDoodle}>✏️</Text>
         </View>
 
         <Text style={styles.label}>{t('profile.appLanguage')}</Text>
@@ -266,10 +267,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   heroName: {
-    fontSize: 20,
-    fontWeight: '800',
+    fontFamily: handFont,
+    fontSize: 27,
     color: colors.background,
-    letterSpacing: -0.3,
+  },
+  heroDoodle: {
+    fontSize: 22,
+    transform: [{ rotate: '8deg' }],
   },
   heroCity: {
     fontSize: 13,
@@ -320,10 +324,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: colors.text,
-    marginTop: 24,
+    fontFamily: handFont,
+    fontSize: 25,
+    color: colors.primaryDark,
+    marginTop: 22,
   },
   hint: {
     fontSize: 12,

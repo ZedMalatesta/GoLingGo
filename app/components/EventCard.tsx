@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { LANGUAGE_FLAGS, levelLabel } from '../constants/catalogs';
-import { cardShadow, colors } from '../constants/colors';
+import { cardShadow, colors, handFont } from '../constants/colors';
 import { AppLocale, LOCALE_TAGS } from '../i18n';
 import { emptyStats, mockAttendeeStats } from '../mocks/attendeeStats';
 import { LanguageEvent } from '../models/Event';
@@ -110,7 +110,7 @@ const EventCard: FC<EventCardProps> = ({ event, isRsvped, onToggleRsvp }) => {
         </View>
 
         <View style={styles.statsSection}>
-          <Text style={styles.statsTitle}>{t('stats.title')}</Text>
+          <Text style={styles.statsTitle}>✏️ {t('stats.title')}</Text>
           <LevelStatsChart stats={stats} userCategory={userCategory} />
         </View>
 
@@ -142,6 +142,9 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.background,
     borderRadius: 18,
+    borderWidth: 1.5,
+    borderColor: colors.border,
+    borderStyle: 'dashed',
     marginHorizontal: 16,
     marginTop: 14,
     ...cardShadow,
@@ -165,9 +168,11 @@ const styles = StyleSheet.create({
   },
   coverBadgeLeft: {
     left: 10,
+    transform: [{ rotate: '-2deg' }],
   },
   coverBadgeRight: {
     right: 10,
+    transform: [{ rotate: '2deg' }],
   },
   coverFlag: {
     fontSize: 16,
@@ -204,7 +209,9 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '600',
     color: colors.primaryDark,
-    backgroundColor: colors.primarySoft,
+    backgroundColor: colors.background,
+    borderWidth: 1,
+    borderColor: colors.border,
     borderRadius: 10,
     paddingHorizontal: 8,
     paddingVertical: 3,
@@ -246,9 +253,9 @@ const styles = StyleSheet.create({
     borderTopColor: colors.border,
   },
   statsTitle: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: colors.text,
+    fontFamily: handFont,
+    fontSize: 21,
+    color: colors.primaryDark,
   },
   rsvpButton: {
     marginTop: 14,
@@ -258,7 +265,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   rsvpButtonActive: {
-    backgroundColor: colors.primarySoft,
+    backgroundColor: colors.background,
+    borderWidth: 1.5,
+    borderColor: colors.primary,
+    borderStyle: 'dashed',
   },
   rsvpButtonDisabled: {
     backgroundColor: colors.border,

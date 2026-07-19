@@ -4,6 +4,7 @@
     "slug": "golinggo",
     "version": "1.0.0",
     "orientation": "portrait",
+    "plugins": ["expo-font"],
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {

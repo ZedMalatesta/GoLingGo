@@ -22,14 +22,17 @@ const Chip: FC<ChipProps> = ({ label, active, onPress }) => (
 const styles = StyleSheet.create({
   chip: {
     paddingHorizontal: 14,
-    paddingVertical: 7,
+    paddingVertical: 6,
     borderRadius: 18,
-    backgroundColor: colors.surface,
+    borderWidth: 1.2,
+    borderColor: colors.border,
+    backgroundColor: colors.background,
     marginRight: 8,
     marginBottom: 8,
   },
   chipActive: {
     backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
   label: {
     fontSize: 13,

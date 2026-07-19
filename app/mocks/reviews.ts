@@ -1,7 +1,7 @@
 import { EventReview } from '../models/Review';
 
 // Reviews left by people who attended previous runs of these recurring
-// events; content stays in the reviewer's own language (it is data).
+// Warsaw events; all texts are in Polish for the Poland-focused demo.
 export const mockReviews: Record<string, EventReview[]> = {
   'evt-1': [
     {
@@ -19,7 +19,7 @@ export const mockReviews: Record<string, EventReview[]> = {
       avatar: '😎',
       level: 'native',
       rating: 4,
-      text: 'Nice crowd and good topics. Sometimes groups get a bit big, but the rotation keeps it fun.',
+      text: 'Świetna ekipa i dobre tematy. Czasem grupy robią się trochę za duże, ale rotacja przy stolikach ratuje sytuację.',
       dateISO: '2026-06-30T22:10:00',
     },
     {
@@ -39,7 +39,7 @@ export const mockReviews: Record<string, EventReview[]> = {
       avatar: '🌍',
       level: 'A2',
       rating: 5,
-      text: 'Kam als Anfängerin und fühlte mich sofort willkommen. Alle sprechen geduldig und langsam.',
+      text: 'Przyszłam jako początkująca i od razu poczułam się mile widziana. Wszyscy mówią cierpliwie i powoli.',
       dateISO: '2026-07-08T20:00:00',
     },
     {
@@ -59,7 +59,7 @@ export const mockReviews: Record<string, EventReview[]> = {
       avatar: '🌸',
       level: 'native',
       rating: 5,
-      text: 'Toujours un plaisir — les courts métrages sont bien choisis et la discussion est vivante.',
+      text: 'Zawsze z przyjemnością — krótkie metraże są świetnie dobrane, a dyskusja bardzo żywa.',
       dateISO: '2026-06-27T22:00:00',
     },
     {
@@ -79,7 +79,7 @@ export const mockReviews: Record<string, EventReview[]> = {
       avatar: '🎧',
       level: 'C1',
       rating: 5,
-      text: 'Sharp debates, great moderation, and genuinely challenging topics. The best advanced club in town.',
+      text: 'Ostre debaty, świetna moderacja i naprawdę wymagające tematy. Najlepszy klub dla zaawansowanych w Warszawie.',
       dateISO: '2026-07-14T21:50:00',
     },
   ],
@@ -99,7 +99,7 @@ export const mockReviews: Record<string, EventReview[]> = {
       avatar: '🙂',
       level: 'native',
       rating: 4,
-      text: '大家都很认真，气氛轻松。希望更多人来练习！',
+      text: 'Wszyscy są bardzo zaangażowani, a atmosfera swobodna. Zapraszam więcej osób do wspólnych ćwiczeń!',
       dateISO: '2026-07-05T18:45:00',
     },
   ],
@@ -121,7 +121,7 @@ export const mockReviews: Record<string, EventReview[]> = {
       avatar: '🌍',
       level: 'B1',
       rating: 5,
-      text: "Best way to practice Polish in Warsaw. The moderators slow down when you're lost and the games are great fun.",
+      text: 'Najlepszy sposób na ćwiczenie polskiego w Warszawie. Moderatorzy zwalniają, kiedy się gubisz, a gry to świetna zabawa.',
       dateISO: '2026-07-13T20:00:00',
     },
   ],

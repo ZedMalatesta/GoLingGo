@@ -5,7 +5,7 @@ import { Platform, SectionList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import EventCard from '../components/EventCard';
-import { colors } from '../constants/colors';
+import { colors, handFont } from '../constants/colors';
 import { mockEvents } from '../mocks/events';
 import { LanguageEvent } from '../models/Event';
 import useAppStore from '../store/appStore';
@@ -96,9 +96,9 @@ const styles = StyleSheet.create({
     paddingBottom: 24,
   },
   sectionTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: colors.text,
+    fontFamily: handFont,
+    fontSize: 27,
+    color: colors.primaryDark,
     marginTop: 20,
     marginHorizontal: 16,
   },

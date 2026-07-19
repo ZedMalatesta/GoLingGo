@@ -23,7 +23,7 @@ import {
   levelLabel,
   LEVELS,
 } from '../constants/catalogs';
-import { colors } from '../constants/colors';
+import { colors, handFont } from '../constants/colors';
 import { EventFormat, LanguageCode, Level } from '../models/Event';
 import useAppStore from '../store/appStore';
 
@@ -109,7 +109,7 @@ const CreateEventPage: FC = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <ScrollView contentContainerStyle={styles.content}>
-          <Text style={styles.heading}>{t('create.heading')}</Text>
+          <Text style={styles.heading}>📝 {t('create.heading')}</Text>
           <Text style={styles.subheading}>{t('create.subheading')}</Text>
 
           <Text style={styles.label}>{t('create.title')}</Text>
@@ -244,9 +244,9 @@ const styles = StyleSheet.create({
     paddingBottom: 32,
   },
   heading: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: colors.text,
+    fontFamily: handFont,
+    fontSize: 30,
+    color: colors.primaryDark,
   },
   subheading: {
     fontSize: 13,

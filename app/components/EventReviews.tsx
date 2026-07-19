@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { colors } from '../constants/colors';
+import { colors, handFont } from '../constants/colors';
 import { AppLocale, LOCALE_TAGS } from '../i18n';
 import { mockReviews } from '../mocks/reviews';
 import { EventReview } from '../models/Review';
@@ -71,7 +71,7 @@ const EventReviews: FC<{ eventId: string }> = ({ eventId }) => {
   return (
     <View style={styles.section}>
       <View style={styles.header}>
-        <Text style={styles.title}>{t('reviews.title')}</Text>
+        <Text style={styles.title}>💬 {t('reviews.title')}</Text>
         <Ionicons name="star" size={13} color={colors.star} />
         <Text style={styles.average}>{average.toFixed(1)}</Text>
         <Text style={styles.count}>({reviews.length})</Text>
@@ -108,9 +108,9 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   title: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: colors.text,
+    fontFamily: handFont,
+    fontSize: 21,
+    color: colors.primaryDark,
     marginRight: 4,
   },
   average: {
