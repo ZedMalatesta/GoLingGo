@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { bodyFont, colors, handFont } from '../constants/colors';
+import LocaleSwitcher from './LocaleSwitcher';
 
 const AppHeader: FC = () => {
   const { t } = useTranslation();
@@ -14,7 +15,10 @@ const AppHeader: FC = () => {
         <Text style={styles.brand}>
           GoLing<Text style={styles.brandAccent}>Go</Text>
         </Text>
-        <Text style={styles.doodles}>✏️ 💬 🎧 📚</Text>
+        <View style={styles.brandSide}>
+          <Text style={styles.doodles}>✏️ 💬</Text>
+          <LocaleSwitcher />
+        </View>
       </View>
       <Text style={styles.tagline}>{t('header.tagline')}</Text>
       <View style={styles.inkUnderline} />
@@ -42,6 +46,11 @@ const styles = StyleSheet.create({
   },
   brandAccent: {
     color: colors.accent,
+  },
+  brandSide: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
   },
   doodles: {
     fontFamily: bodyFont.regular,

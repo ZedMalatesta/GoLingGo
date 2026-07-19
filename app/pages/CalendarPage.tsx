@@ -6,6 +6,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import EventCard from '../components/EventCard';
+import LocaleSwitcher from '../components/LocaleSwitcher';
 import PastEventCard from '../components/PastEventCard';
 import { bodyFont, cardShadow, colors, handFont } from '../constants/colors';
 import useToggleRsvp from '../hooks/useToggleRsvp';
@@ -100,7 +101,11 @@ const CalendarPage: FC = () => {
   const todayKey = dateKey(today);
 
   const calendar = (
-    <View style={styles.calendarCard}>
+    <View>
+      <View style={styles.switcherRow}>
+        <LocaleSwitcher />
+      </View>
+      <View style={styles.calendarCard}>
       <View style={styles.monthRow}>
         <Pressable onPress={() => shiftMonth(-1)} hitSlop={10}>
           <Ionicons name="chevron-back" size={20} color={colors.primary} />
@@ -149,6 +154,7 @@ const CalendarPage: FC = () => {
             </View>
           ),
         )}
+        </View>
       </View>
     </View>
   );
@@ -189,6 +195,12 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingBottom: 24,
+  },
+  switcherRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingHorizontal: 16,
+    paddingTop: 10,
   },
   calendarCard: {
     backgroundColor: colors.background,

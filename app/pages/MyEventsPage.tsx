@@ -5,6 +5,7 @@ import { Platform, SectionList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import EventCard from '../components/EventCard';
+import LocaleSwitcher from '../components/LocaleSwitcher';
 import { bodyFont, colors, handFont } from '../constants/colors';
 import { mockEvents } from '../mocks/events';
 import { LanguageEvent } from '../models/Event';
@@ -56,6 +57,11 @@ const MyEventsPage: FC = () => {
         sections={sections}
         keyExtractor={(event, index) => `${event.id}-${index}`}
         contentContainerStyle={styles.list}
+        ListHeaderComponent={
+          <View style={styles.switcherRow}>
+            <LocaleSwitcher />
+          </View>
+        }
         renderSectionHeader={({ section }) => (
           <View>
             <Text style={styles.sectionTitle}>{section.title}</Text>
@@ -94,6 +100,12 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingBottom: 24,
+  },
+  switcherRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingHorizontal: 16,
+    paddingTop: 10,
   },
   sectionTitle: {
     fontFamily: handFont,

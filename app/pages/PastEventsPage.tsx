@@ -1,9 +1,10 @@
 import React, { FC, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { FlatList, StyleSheet, Text } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import LocaleSwitcher from '../components/LocaleSwitcher';
 import PastEventCard from '../components/PastEventCard';
 import { colors, handFont } from '../constants/colors';
 import { mockPastAnalytics, mockPastEvents } from '../mocks/pastEvents';
@@ -26,7 +27,10 @@ const PastEventsPage: FC = () => {
         keyExtractor={(event) => event.id}
         contentContainerStyle={styles.list}
         ListHeaderComponent={
-          <Text style={styles.title}>🕗 {t('past.title')}</Text>
+          <View style={styles.titleRow}>
+            <Text style={styles.title}>🕗 {t('past.title')}</Text>
+            <LocaleSwitcher />
+          </View>
         }
         renderItem={({ item }) => (
           <PastEventCard event={item} analytics={mockPastAnalytics[item.id]} />
@@ -44,12 +48,17 @@ const styles = StyleSheet.create({
   list: {
     paddingBottom: 24,
   },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 16,
+    marginHorizontal: 16,
+  },
   title: {
     fontFamily: handFont,
     fontSize: 29,
     color: colors.primaryDark,
-    marginTop: 16,
-    marginHorizontal: 16,
   },
 });
 

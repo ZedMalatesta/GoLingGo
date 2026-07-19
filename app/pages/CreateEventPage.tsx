@@ -16,6 +16,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Chip from '../components/Chip';
+import LocaleSwitcher from '../components/LocaleSwitcher';
 import {
   FORMAT_CODES,
   LANGUAGE_CODES,
@@ -109,7 +110,10 @@ const CreateEventPage: FC = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <ScrollView contentContainerStyle={styles.content}>
-          <Text style={styles.heading}>📝 {t('create.heading')}</Text>
+          <View style={styles.headingRow}>
+            <Text style={styles.heading}>📝 {t('create.heading')}</Text>
+            <LocaleSwitcher />
+          </View>
           <Text style={styles.subheading}>{t('create.subheading')}</Text>
 
           <Text style={styles.label}>{t('create.title')}</Text>
@@ -242,6 +246,11 @@ const styles = StyleSheet.create({
   content: {
     padding: 16,
     paddingBottom: 32,
+  },
+  headingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   heading: {
     fontFamily: handFont,
