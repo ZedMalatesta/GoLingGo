@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors, handFont } from '../constants/colors';
 import { AppLocale, LOCALE_TAGS } from '../i18n';
@@ -36,7 +36,7 @@ const ReviewRow: FC<{ review: EventReview; locale: string }> = ({
 
   return (
     <View style={styles.review}>
-      <Text style={styles.avatar}>{review.avatar}</Text>
+      <Image source={{ uri: review.avatarUrl }} style={styles.avatar} />
       <View style={styles.reviewBody}>
         <View style={styles.reviewHeader}>
           <Text style={styles.author}>{review.author}</Text>
@@ -128,7 +128,12 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   avatar: {
-    fontSize: 20,
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    backgroundColor: colors.surface,
+    borderWidth: 1.5,
+    borderColor: colors.border,
   },
   reviewBody: {
     flex: 1,

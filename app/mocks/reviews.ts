@@ -7,7 +7,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-1',
       author: 'Anna K.',
-      avatar: '🦉',
+      avatarUrl: 'https://i.pravatar.cc/100?img=47',
       level: 'B1',
       rating: 5,
       text: 'Bardzo przyjazna atmosfera! Moderator delikatnie wciąga do rozmowy nawet nieśmiałych. Idę już trzeci raz.',
@@ -16,7 +16,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-2',
       author: 'Marco',
-      avatar: '😎',
+      avatarUrl: 'https://i.pravatar.cc/100?img=12',
       level: 'native',
       rating: 4,
       text: 'Świetna ekipa i dobre tematy. Czasem grupy robią się trochę za duże, ale rotacja przy stolikach ratuje sytuację.',
@@ -25,7 +25,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-3',
       author: 'Paweł',
-      avatar: '☕',
+      avatarUrl: 'https://i.pravatar.cc/100?img=59',
       level: 'B2',
       rating: 5,
       text: 'Kawa świetna, rozmowy jeszcze lepsze. Przez cały wieczór naprawdę dużo mówisz, a nie tylko słuchasz.',
@@ -36,7 +36,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-4',
       author: 'Olga',
-      avatar: '🌍',
+      avatarUrl: 'https://i.pravatar.cc/100?img=44',
       level: 'A2',
       rating: 5,
       text: 'Przyszłam jako początkująca i od razu poczułam się mile widziana. Wszyscy mówią cierpliwie i powoli.',
@@ -45,7 +45,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-5',
       author: 'Darek',
-      avatar: '🚀',
+      avatarUrl: 'https://i.pravatar.cc/100?img=68',
       level: 'B1',
       rating: 4,
       text: 'Dobry format, swobodna rozmowa bez sztywnego programu. Czasem brakuje tematów do dyskusji.',
@@ -56,7 +56,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-6',
       author: 'Céline',
-      avatar: '🌸',
+      avatarUrl: 'https://i.pravatar.cc/100?img=45',
       level: 'native',
       rating: 5,
       text: 'Zawsze z przyjemnością — krótkie metraże są świetnie dobrane, a dyskusja bardzo żywa.',
@@ -65,7 +65,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-7',
       author: 'Igor',
-      avatar: '📚',
+      avatarUrl: 'https://i.pravatar.cc/100?img=51',
       level: 'B2',
       rating: 4,
       text: 'Filmy ciekawe, dyskusja dynamiczna. Dla B1 może być ciężko, lepiej mieć pewne B2.',
@@ -76,7 +76,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-8',
       author: 'Sofia',
-      avatar: '🎧',
+      avatarUrl: 'https://i.pravatar.cc/100?img=26',
       level: 'C1',
       rating: 5,
       text: 'Ostre debaty, świetna moderacja i naprawdę wymagające tematy. Najlepszy klub dla zaawansowanych w Warszawie.',
@@ -87,7 +87,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-9',
       author: 'Marysia',
-      avatar: '🌸',
+      avatarUrl: 'https://i.pravatar.cc/100?img=32',
       level: 'A1',
       rating: 5,
       text: 'Native speakerzy są bardzo cierpliwi, wszystko tłumaczą gestami i obrazkami. Po zajęciach wreszcie zapamiętałam tony!',
@@ -96,7 +96,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-10',
       author: 'Li Wei',
-      avatar: '🙂',
+      avatarUrl: 'https://i.pravatar.cc/100?img=60',
       level: 'native',
       rating: 4,
       text: 'Wszyscy są bardzo zaangażowani, a atmosfera swobodna. Zapraszam więcej osób do wspólnych ćwiczeń!',
@@ -107,7 +107,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-11',
       author: 'Krystyna',
-      avatar: '☕',
+      avatarUrl: 'https://i.pravatar.cc/100?img=25',
       level: 'A2',
       rating: 5,
       text: 'Aperitivo pyszne, Włosi przy stole prawdziwi, błędy poprawiają z humorem. Bellissimo!',
@@ -118,7 +118,7 @@ export const mockReviews: Record<string, EventReview[]> = {
     {
       id: 'rev-12',
       author: 'James',
-      avatar: '🌍',
+      avatarUrl: 'https://i.pravatar.cc/100?img=13',
       level: 'B1',
       rating: 5,
       text: 'Najlepszy sposób na ćwiczenie polskiego w Warszawie. Moderatorzy zwalniają, kiedy się gubisz, a gry to świetna zabawa.',
