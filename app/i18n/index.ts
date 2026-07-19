@@ -7,9 +7,9 @@ import pl from './locales/pl';
 import ru from './locales/ru';
 
 export const APP_LOCALES = [
-  { code: 'ru', label: 'Русский' },
-  { code: 'en', label: 'English' },
   { code: 'pl', label: 'Polski' },
+  { code: 'en', label: 'English' },
+  { code: 'ru', label: 'Русский' },
   { code: 'be', label: 'Беларуская' },
 ] as const;
 
@@ -30,8 +30,8 @@ i18n.use(initReactI18next).init({
     pl: { translation: pl },
     be: { translation: be },
   },
-  lng: 'ru',
-  fallbackLng: 'ru',
+  lng: 'pl',
+  fallbackLng: 'pl',
   interpolation: { escapeValue: false },
 });
 

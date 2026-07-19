@@ -6,11 +6,11 @@ export const mockReviews: Record<string, EventReview[]> = {
   'evt-1': [
     {
       id: 'rev-1',
-      author: 'Анна К.',
+      author: 'Anna K.',
       avatar: '🦉',
       level: 'B1',
       rating: 5,
-      text: 'Очень дружелюбная атмосфера! Модератор мягко втягивает в разговор даже стеснительных. Уже третий раз хожу.',
+      text: 'Bardzo przyjazna atmosfera! Moderator delikatnie wciąga do rozmowy nawet nieśmiałych. Idę już trzeci raz.',
       dateISO: '2026-07-07T21:30:00',
     },
     {
@@ -24,11 +24,11 @@ export const mockReviews: Record<string, EventReview[]> = {
     },
     {
       id: 'rev-3',
-      author: 'Павел',
+      author: 'Paweł',
       avatar: '☕',
       level: 'B2',
       rating: 5,
-      text: 'Кофе отличный, разговоры ещё лучше. За вечер реально много говоришь сам, а не слушаешь.',
+      text: 'Kawa świetna, rozmowy jeszcze lepsze. Przez cały wieczór naprawdę dużo mówisz, a nie tylko słuchasz.',
       dateISO: '2026-06-23T20:45:00',
     },
   ],
@@ -44,11 +44,11 @@ export const mockReviews: Record<string, EventReview[]> = {
     },
     {
       id: 'rev-5',
-      author: 'Дмитрий',
+      author: 'Darek',
       avatar: '🚀',
       level: 'B1',
       rating: 4,
-      text: 'Хороший формат, свободное общение без строгой программы. Иногда не хватает тем для разговора.',
+      text: 'Dobry format, swobodna rozmowa bez sztywnego programu. Czasem brakuje tematów do dyskusji.',
       dateISO: '2026-07-01T21:15:00',
     },
   ],
@@ -64,11 +64,11 @@ export const mockReviews: Record<string, EventReview[]> = {
     },
     {
       id: 'rev-7',
-      author: 'Игорь',
+      author: 'Igor',
       avatar: '📚',
       level: 'B2',
       rating: 4,
-      text: 'Фильмы интересные, обсуждение динамичное. Для B1 может быть тяжеловато, лучше уверенный B2.',
+      text: 'Filmy ciekawe, dyskusja dynamiczna. Dla B1 może być ciężko, lepiej mieć pewne B2.',
       dateISO: '2026-06-20T21:40:00',
     },
   ],
@@ -86,11 +86,11 @@ export const mockReviews: Record<string, EventReview[]> = {
   'evt-6': [
     {
       id: 'rev-9',
-      author: 'Мария',
+      author: 'Marysia',
       avatar: '🌸',
       level: 'A1',
       rating: 5,
-      text: 'Носители очень терпеливые, всё объясняют жестами и картинками. После занятия наконец-то запомнила тоны!',
+      text: 'Native speakerzy są bardzo cierpliwi, wszystko tłumaczą gestami i obrazkami. Po zajęciach wreszcie zapamiętałam tony!',
       dateISO: '2026-07-12T19:00:00',
     },
     {
@@ -106,12 +106,23 @@ export const mockReviews: Record<string, EventReview[]> = {
   'evt-7': [
     {
       id: 'rev-11',
-      author: 'Кристина',
+      author: 'Krystyna',
       avatar: '☕',
       level: 'A2',
       rating: 5,
-      text: 'Аперитив вкусный, итальянцы за столом настоящие, ошибки исправляют с юмором. Bellissimo!',
+      text: 'Aperitivo pyszne, Włosi przy stole prawdziwi, błędy poprawiają z humorem. Bellissimo!',
       dateISO: '2026-07-09T22:20:00',
+    },
+  ],
+  'evt-8': [
+    {
+      id: 'rev-12',
+      author: 'James',
+      avatar: '🌍',
+      level: 'B1',
+      rating: 5,
+      text: "Best way to practice Polish in Warsaw. The moderators slow down when you're lost and the games are great fun.",
+      dateISO: '2026-07-13T20:00:00',
     },
   ],
 };

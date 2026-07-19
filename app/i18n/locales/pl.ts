@@ -69,7 +69,7 @@ export default {
     level: 'Poziom',
     format: 'Format',
     freeEvent: 'Wydarzenie bezpłatne',
-    pricePlaceholder: 'Cena, np. 500 ₽',
+    pricePlaceholder: 'Cena, np. 40 zł',
     date: 'Data i godzina',
     venue: 'Miejsce',
     venuePlaceholder: 'Kawiarnia, adres lub link do Zooma',

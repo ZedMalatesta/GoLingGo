@@ -69,7 +69,7 @@ export default {
     level: 'Уровень',
     format: 'Формат',
     freeEvent: 'Бесплатное событие',
-    pricePlaceholder: 'Цена, например 500 ₽',
+    pricePlaceholder: 'Цена, например 40 zł',
     date: 'Дата и время',
     venue: 'Место',
     venuePlaceholder: 'Кафе, адрес или ссылка на Zoom',

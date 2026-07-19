@@ -20,12 +20,12 @@ const defaultFilters: EventFilters = {
 
 const defaultProfile: UserProfile = {
   name: '',
-  city: 'Белград',
+  city: 'Warszawa',
   avatar: '🙂',
   bio: '',
   interests: [],
   languages: [
-    { code: 'ru', role: 'native', level: 'C2' },
+    { code: 'pl', role: 'native', level: 'C2' },
     { code: 'en', role: 'learning', level: 'B1' },
   ],
 };
@@ -84,7 +84,7 @@ const useAppStore = create<AppState>()(
   persist(
     (set) => ({
       hydrated: false,
-      locale: 'ru',
+      locale: 'pl',
       filters: defaultFilters,
       rsvpIds: [],
       reminders: {},
@@ -140,7 +140,9 @@ const useAppStore = create<AppState>()(
       setHydrated: () => set({ hydrated: true }),
     }),
     {
-      name: 'golinggo-store',
+      // Key bumped when the demo context changed (ru → pl defaults) so
+      // returning visitors start from the new defaults.
+      name: 'golinggo-store-v2',
       storage: createJSONStorage(() => AsyncStorage),
       partialize: ({ rsvpIds, reminders, myEvents, profile, locale }) => ({
         rsvpIds,
